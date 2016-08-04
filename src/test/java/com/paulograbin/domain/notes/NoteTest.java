@@ -14,7 +14,13 @@ import static org.junit.Assert.*;
 public class NoteTest {
 
     @Test
-    public void testEmptyNote() {
+    public void NoteIsCreatedWithCreationDate() {
+        Note note = new Note();
+        assertNotNull(note.getCreationDate());
+    }
+
+    @Test
+    public void NoteIsCreatedWithoutTextAndNotDeleted() {
         Note note = new Note();
 
         assertEquals("", note.getText());
@@ -22,18 +28,16 @@ public class NoteTest {
     }
 
     @Test
-    public void testAddText() {
+    public void afterTextIsAdded_NoteMustHaveText() {
         Note note = new Note();
-
         note.setText("abc");
 
         assertEquals("abc", note.getText());
     }
 
     @Test
-    public void testDeleted() {
+    public void afterNoteIsDeleted_NoteMustBeDeleted() {
         Note note = new Note();
-
         note.setDeleted();
 
         assertTrue(note.isDeleted());

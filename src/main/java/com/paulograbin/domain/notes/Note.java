@@ -1,13 +1,17 @@
 package com.paulograbin.domain.notes;
 
 
-public class Note {
+import java.time.LocalDateTime;
+
+public class Note extends Entity {
     private String text;
     private boolean deleted;
+    private LocalDateTime creationDate;
 
 
     public Note() {
         this.text = "";
+        creationDate = LocalDateTime.now();
     }
 
     public String getText() {
@@ -31,6 +35,15 @@ public class Note {
         return "Note{" +
                 "text='" + text + '\'' +
                 ", deleted=" + deleted +
+                ", creation date=" + creationDate +
                 '}';
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 }
