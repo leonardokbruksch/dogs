@@ -1,5 +1,6 @@
 package com.paulograbin.domain.notes;
 
+import com.paulograbin.domain.EntityTest;
 import com.paulograbin.web.controllers.NotesController;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,7 +12,7 @@ import java.util.Calendar;
 
 import static org.junit.Assert.*;
 
-public class NoteTest {
+public class NoteTest extends EntityTest<Note> {
 
     @Test
     public void NoteIsCreatedWithCreationDate() {
@@ -41,5 +42,10 @@ public class NoteTest {
         note.setDeleted();
 
         assertTrue(note.isDeleted());
+    }
+
+    @Override
+    protected Note makeOne() {
+        return new Note();
     }
 }

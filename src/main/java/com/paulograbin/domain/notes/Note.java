@@ -4,14 +4,22 @@ package com.paulograbin.domain.notes;
 import java.time.LocalDateTime;
 
 public class Note extends Entity {
+
     private String text;
     private boolean deleted;
     private LocalDateTime creationDate;
 
 
     public Note() {
-        this.text = "";
-        creationDate = LocalDateTime.now();
+        this(Entity.INITIAL_ID, "");
+    }
+
+    public Note(int id, String text) {
+        super(id);
+
+        this.id = id;
+        this.text = text;
+        this.creationDate = LocalDateTime.now();
     }
 
     public String getText() {
@@ -33,10 +41,11 @@ public class Note extends Entity {
     @Override
     public String toString() {
         return "Note{" +
-                "text='" + text + '\'' +
+                "id=" + id +
+                ", text='" + text +
                 ", deleted=" + deleted +
-                ", creation date=" + creationDate +
-                '}';
+                ", creationDate=" + creationDate +
+                "} " + super.toString();
     }
 
     public LocalDateTime getCreationDate() {

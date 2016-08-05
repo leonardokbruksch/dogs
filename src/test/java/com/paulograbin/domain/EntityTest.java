@@ -1,24 +1,27 @@
-package com.paulograbin.domain.notes;
+package com.paulograbin.domain;
 
+import com.paulograbin.domain.notes.Entity;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 
-public class EntityTest {
+public abstract class EntityTest<T extends Entity> {
 
-    Entity entity;
+    T entity;
+
+    protected abstract T makeOne();
 
     @Test
     public void newEntityHasNoId() {
-        entity = new Entity();
+        entity = makeOne();
 
         assertEquals(Entity.INITIAL_ID, entity.getId());
     }
 
     @Test
-    public void afterIdIsSet__entityMustHaveId() {
-        entity = new Entity();
+    public void afterIdIsSet_entityMustHaveId() {
+        entity = makeOne();
         entity.setId(5);
 
         assertEquals(5, entity.getId());
@@ -26,7 +29,7 @@ public class EntityTest {
 
     @Test
     public void idCannotBeNegative() {
-        entity = new Entity();
+        entity = makeOne();
         entity.setId(-5);
 
         assertEquals(Entity.INITIAL_ID, entity.getId());
