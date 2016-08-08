@@ -11,10 +11,10 @@ public class Note extends Entity {
 
 
     public Note() {
-        this(Entity.INITIAL_ID, "");
+        this(null, "");
     }
 
-    public Note(int id, String text) {
+    public Note(Integer id, String text) {
         super(id);
 
         this.id = id;

@@ -10,13 +10,14 @@ public abstract class EntityTest<T extends Entity> {
 
     T entity;
 
+
     protected abstract T makeOne();
 
     @Test
-    public void newEntityHasNoId() {
+    public void newEntityHasNullId() {
         entity = makeOne();
 
-        assertEquals(Entity.INITIAL_ID, entity.getId());
+        assertEquals(null, entity.getId());
     }
 
     @Test
@@ -24,7 +25,7 @@ public abstract class EntityTest<T extends Entity> {
         entity = makeOne();
         entity.setId(5);
 
-        assertEquals(5, entity.getId());
+        assertEquals(new Integer(5), entity.getId());
     }
 
     @Test
@@ -32,6 +33,6 @@ public abstract class EntityTest<T extends Entity> {
         entity = makeOne();
         entity.setId(-5);
 
-        assertEquals(Entity.INITIAL_ID, entity.getId());
+        assertEquals(null, entity.getId());
     }
 }
