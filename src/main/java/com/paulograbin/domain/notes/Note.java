@@ -45,14 +45,11 @@ public class Note extends Entity {
                 ", text='" + text +
                 ", deleted=" + deleted +
                 ", creationDate=" + creationDate +
-                "} " + super.toString();
+                "} ";
     }
 
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
 }

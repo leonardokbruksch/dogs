@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -33,7 +35,7 @@ public class NotesController {
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody String list() {
-        Collection<Note> notes = new ArrayList<>();
+        Map<Integer, Note> notes = new HashMap<>();
         new ReadNotesUseCase(dao, notes).execute();
 
         return converter.toJson(notes);

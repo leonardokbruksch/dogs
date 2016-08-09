@@ -11,18 +11,20 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
 public class ReadNoteUseCaseTest {
 
     private NotesDAO dao;
-    private Collection<Note> response;
+    private Map<Integer, Note> response;
 
     @Before
     public void setUp() throws Exception {
         dao = new InMemoryNotesDAO();
-        response = new ArrayList<>();
+        response = new HashMap<>();
     }
 
     @Test

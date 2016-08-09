@@ -15,7 +15,7 @@ public abstract class Entity {
     }
 
     public void setId(Integer value) {
-        if(value > 0)
+        if(value >= 0)
             id = new Integer(value);
     }
 }

@@ -4,30 +4,38 @@ import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesDAO;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 @Repository
 public class InMemoryNotesDAO implements NotesDAO {
 
-    private ArrayList<Note> notes;
+    private Map<Integer, Note> notes;
+    private int lastId;
 
     public InMemoryNotesDAO() {
-        notes = new ArrayList<>();
+        lastId = 0;
+        notes = new HashMap<>();
     }
 
     @Override
     public void save(Note entity) {
+        if(entity.getId() == null) {
+            entity.setId(getNextId());
+        }
+
+        notes.put(entity.getId(), entity);
         System.out.println("Inserindo " + entity.toString());
-        notes.add(entity);
+    }
+
+    private int getNextId() {
+        return lastId++;
     }
 
     @Override
-    public List<Note> list() {
+    public Map<Integer, Note> list() {
         if(notes.isEmpty())
-            return Collections.EMPTY_LIST;
+            return Collections.EMPTY_MAP;
 
         return notes;
     }
