@@ -38,4 +38,11 @@ public class NotesController {
 
         return converter.toJson(notes);
     }
+
+    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody String delete(@PathVariable("id") int id) {
+        System.out.println("Deletando " + id);
+
+        return "deleting...";
+    }
 }
