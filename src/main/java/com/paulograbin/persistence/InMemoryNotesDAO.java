@@ -4,7 +4,10 @@ import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesDAO;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Repository
@@ -33,10 +36,10 @@ public class InMemoryNotesDAO implements NotesDAO {
     }
 
     @Override
-    public Map<Integer, Note> list() {
+    public Collection<Note> list() {
         if(notes.isEmpty())
-            return Collections.EMPTY_MAP;
+            return Collections.EMPTY_LIST;
 
-        return notes;
+        return notes.values();
     }
 }

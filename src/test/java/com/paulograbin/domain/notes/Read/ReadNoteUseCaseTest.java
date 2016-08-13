@@ -19,12 +19,12 @@ import static org.junit.Assert.assertEquals;
 public class ReadNoteUseCaseTest {
 
     private NotesDAO dao;
-    private Map<Integer, Note> response;
+    private Collection<Note> response;
 
     @Before
     public void setUp() throws Exception {
         dao = new InMemoryNotesDAO();
-        response = new HashMap<>();
+        response = new ArrayList<>();
     }
 
     @Test

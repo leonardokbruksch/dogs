@@ -30,8 +30,6 @@ public class InMemoryNotesDAOTest {
         Note aNote = new Note(15, "olá");
 
         repository.save(aNote);
-
-
     }
 
     @Test

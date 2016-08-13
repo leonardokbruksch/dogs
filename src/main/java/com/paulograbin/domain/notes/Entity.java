@@ -3,10 +3,10 @@ package com.paulograbin.domain.notes;
 
 public abstract class Entity {
 
-    protected Integer id;
+    Integer id;
 
 
-    public Entity(Integer id) {
+    Entity(Integer id) {
         this.id = id;
     }
 
@@ -16,6 +16,6 @@ public abstract class Entity {
 
     public void setId(Integer value) {
         if(value >= 0)
-            id = new Integer(value);
+            id = value;
     }
 }

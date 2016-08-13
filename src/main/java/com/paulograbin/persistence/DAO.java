@@ -1,11 +1,13 @@
 package com.paulograbin.persistence;
 
-import java.util.Map;
+import com.paulograbin.domain.notes.Note;
+
+import java.util.Collection;
 
 
 public interface DAO<T> {
 
     void save(T entity);
 
-    Map<Integer, T> list();
+    Collection<T> list();
 }
