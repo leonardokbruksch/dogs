@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import com.paulograbin.domain.notes.Create.CreateNoteRequest;
 import com.paulograbin.domain.notes.Create.CreateNoteResponse;
 import com.paulograbin.domain.notes.Create.CreateNoteUseCase;
+import com.paulograbin.domain.notes.Delete.DeleteNoteRequest;
+import com.paulograbin.domain.notes.Delete.DeleteNoteResponse;
+import com.paulograbin.domain.notes.Delete.DeleteNoteUseCase;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesDAO;
 import com.paulograbin.domain.notes.Read.ReadNotesUseCase;
@@ -37,5 +40,16 @@ public class NotesController {
         new ReadNotesUseCase(dao, notes).execute();
 
         return converter.toJson(notes);
+    }
+
+    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody String delete(@PathVariable("id") int id) {
+        DeleteNoteRequest request = new DeleteNoteRequest();
+        request.setIdToDelete(id);
+
+        DeleteNoteResponse response = new DeleteNoteResponse();
+        new DeleteNoteUseCase(dao, request, response).execute();
+
+        return converter.toJson(response);
     }
 }

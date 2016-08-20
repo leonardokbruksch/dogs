@@ -1,14 +1,7 @@
 package com.paulograbin.domain.notes;
 
 import com.paulograbin.domain.EntityTest;
-import com.paulograbin.web.controllers.NotesController;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.util.Calendar;
 
 import static org.junit.Assert.*;
 
