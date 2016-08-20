@@ -5,7 +5,6 @@ import com.paulograbin.domain.notes.NotesDAO;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,9 +36,27 @@ public class InMemoryNotesDAO implements NotesDAO {
 
     @Override
     public Collection<Note> list() {
-        if(notes.isEmpty())
-            return Collections.EMPTY_LIST;
-
         return notes.values();
+    }
+
+    @Override
+    public void delete(int idToDelete) {
+        Note n = getById(idToDelete);
+
+        n.setDeleted();
+
+        save(n);
+
+        System.out.println("Deletada nota " + idToDelete);
+    }
+
+    @Override
+    public Note getById(Integer id) {
+        Note n = notes.get(id);
+
+        if (n != null)
+            return n;
+        else
+            throw new RuntimeException("Entity not found");
     }
 }
