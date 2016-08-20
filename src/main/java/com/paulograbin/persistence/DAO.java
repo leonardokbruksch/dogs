@@ -1,11 +1,15 @@
 package com.paulograbin.persistence;
 
-import java.util.Map;
+import java.util.Collection;
 
 
 public interface DAO<T> {
 
     void save(T entity);
 
-    Map<Integer, T> list();
+    Collection<T> list();
+
+    void delete(int idToDelete);
+
+    T getById(Integer id);
 }

@@ -7,7 +7,7 @@ public class Note extends Entity {
 
     private String text;
     private boolean deleted;
-    private LocalDateTime creationDate;
+    private final LocalDateTime creationDate;
 
 
     public Note() {
