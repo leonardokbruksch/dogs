@@ -12,4 +12,6 @@ public interface DAO<T> {
     void delete(int idToDelete);
 
     T getById(Integer id);
+
+    void update(T entity);
 }

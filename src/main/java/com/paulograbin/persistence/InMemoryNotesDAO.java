@@ -27,7 +27,6 @@ public class InMemoryNotesDAO implements NotesDAO {
         }
 
         notes.put(entity.getId(), entity);
-        System.out.println("Inserindo " + entity.toString());
     }
 
     private int getNextId() {
@@ -44,10 +43,6 @@ public class InMemoryNotesDAO implements NotesDAO {
         Note n = getById(idToDelete);
 
         n.setDeleted();
-
-        save(n);
-
-        System.out.println("Deletada nota " + idToDelete);
     }
 
     @Override
@@ -58,5 +53,17 @@ public class InMemoryNotesDAO implements NotesDAO {
             return n;
         else
             throw new RuntimeException("Entity not found");
+    }
+
+    @Override
+    public void update(Note e) {
+        Note saved = getById(e.getId());
+
+        if(saved != null) {
+            saved.setText(e.getText());
+        }
+        else
+            throw new RuntimeException("Entity not found");
+
     }
 }

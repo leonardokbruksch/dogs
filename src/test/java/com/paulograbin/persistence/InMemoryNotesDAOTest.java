@@ -2,6 +2,7 @@ package com.paulograbin.persistence;
 
 
 import com.paulograbin.domain.notes.Note;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,6 +10,12 @@ import static org.junit.Assert.*;
 public class InMemoryNotesDAOTest {
 
     InMemoryNotesDAO repository;
+
+
+    @Before
+    public void setUp() {
+        repository = new InMemoryNotesDAO();
+    }
 
     @Test
     public void withEmptyRepository__mustReturnZero() {
@@ -22,8 +29,6 @@ public class InMemoryNotesDAOTest {
      */
     @Test
     public void givenANoteIsSaved__sizeMustBeOne() {
-        repository = new InMemoryNotesDAO();
-
         repository.save(new Note());
 
         assertEquals(1, repository.list().size());
@@ -31,7 +36,6 @@ public class InMemoryNotesDAOTest {
 
     @Test
     public void givenEntityWithNoId__afterBeingSaveEntityMustHaveId() {
-        repository = new InMemoryNotesDAO();
         Note aNote = new Note();
 
         repository.save(aNote);
@@ -41,8 +45,6 @@ public class InMemoryNotesDAOTest {
 
     @Test
     public void givenTwoEntitiesWithoutId__afterSaveTheirIdCannotBeTheSame() {
-        repository = new InMemoryNotesDAO();
-
         Note firstNote = new Note();
         Note secondNote = new Note();
 
@@ -54,7 +56,6 @@ public class InMemoryNotesDAOTest {
 
     @Test
     public void givenEntityWithId__afterSaveMustHaveIdPreserved() {
-        repository = new InMemoryNotesDAO();
         Note aNote = new Note(5, "olá");
 
         repository.save(aNote);
@@ -67,7 +68,6 @@ public class InMemoryNotesDAOTest {
      */
     @Test
     public void givenValidId__entityMustBeReturned() {
-        repository = new InMemoryNotesDAO();
         Note n = new Note(3, "Olá");
 
         repository.save(n);
@@ -79,16 +79,12 @@ public class InMemoryNotesDAOTest {
 
     @Test(expected = RuntimeException.class)
     public void givenNonExistingId__noEntityIsReturned() {
-        repository = new InMemoryNotesDAO();
-
         repository.getById(3);
         fail();
     }
 
     @Test(expected = RuntimeException.class)
     public void givenNullId__noEntityIsReturned() {
-        repository = new InMemoryNotesDAO();
-
         repository.getById(null);
         fail();
     }
@@ -100,7 +96,6 @@ public class InMemoryNotesDAOTest {
     public void givenValidId__noteShouldBeDeleted() {
         Note n = new Note(1, "olá");
 
-        repository = new InMemoryNotesDAO();
         repository.save(n);
 
         assertFalse(n.isDeleted());
@@ -112,8 +107,6 @@ public class InMemoryNotesDAOTest {
 
     @Test(expected = RuntimeException.class)
     public void givenInvalidId__noNoteIsDeleted() {
-        repository = new InMemoryNotesDAO();
-
         repository.save(new Note());
         repository.save(new Note());
 
@@ -122,5 +115,21 @@ public class InMemoryNotesDAOTest {
         repository.delete(Integer.MAX_VALUE);
 
         assertEquals(noteCount, repository.list().size());
+    }
+    
+    /*
+     * UPDATE
+     */
+    @Test
+    public void givenValidInput__noteIsUpdated() {
+        Note n = new Note(3, "olá");
+
+        repository.save(n);
+        assertEquals(1, repository.list().size());
+
+        Note another = new Note(3, "olá marilene");
+        repository.update(another);
+
+        assertEquals("olá marilene", n.getText());
     }
 }

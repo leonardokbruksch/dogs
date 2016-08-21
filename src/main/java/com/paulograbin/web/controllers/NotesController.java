@@ -10,6 +10,9 @@ import com.paulograbin.domain.notes.Delete.DeleteNoteUseCase;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesDAO;
 import com.paulograbin.domain.notes.Read.ReadNotesUseCase;
+import com.paulograbin.domain.notes.Update.UpdateNoteRequest;
+import com.paulograbin.domain.notes.Update.UpdateNoteResponse;
+import com.paulograbin.domain.notes.Update.UpdateNoteUseCase;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -49,6 +52,14 @@ public class NotesController {
 
         DeleteNoteResponse response = new DeleteNoteResponse();
         new DeleteNoteUseCase(dao, request, response).execute();
+
+        return converter.toJson(response);
+    }
+
+    @RequestMapping(value="/{id}", method = RequestMethod.PUT)
+    public @ResponseBody String update(UpdateNoteRequest request) {
+        UpdateNoteResponse response = new UpdateNoteResponse();
+        new UpdateNoteUseCase(dao, request, response).execute();
 
         return converter.toJson(response);
     }
