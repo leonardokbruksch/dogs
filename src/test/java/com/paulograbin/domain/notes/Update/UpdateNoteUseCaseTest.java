@@ -28,8 +28,8 @@ public class UpdateNoteUseCaseTest {
         Note n = new Note(3, "olá");
         dao.save(n);
 
-        request.id = 3;
-        request.text = "olá marilene";
+        request.setId(3);
+        request.setText("olá marilene");
 
         new UpdateNoteUseCase(dao, request, response).execute();
 
@@ -39,8 +39,8 @@ public class UpdateNoteUseCaseTest {
 
     @Test
     public void givenValidInputButInvalidEntity__mustReturnError() {
-        request.id = 3;
-        request.text = "olá";
+        request.setId(3);
+        request.setText("olá");
 
         new UpdateNoteUseCase(dao, request, response).execute();
 
@@ -52,8 +52,8 @@ public class UpdateNoteUseCaseTest {
         Note n = new Note(3, "olá");
         dao.save(n);
 
-        request.id = null;
-        request.text = "olá marilene";
+        request.setId(null);
+        request.setText("olá marilene");
 
         new UpdateNoteUseCase(dao, request, response).execute();
 
@@ -66,8 +66,8 @@ public class UpdateNoteUseCaseTest {
         Note n = new Note(3, "olá");
         dao.save(n);
 
-        request.id = 3;
-        request.text = "";
+        request.setId(3);
+        request.setText("");
 
         new UpdateNoteUseCase(dao, request, response).execute();
 

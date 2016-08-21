@@ -6,7 +6,6 @@ public class UpdateNoteRequest {
     public Integer id;
     public String text;
 
-
     public void setId(Integer id) {
         this.id = id;
     }
