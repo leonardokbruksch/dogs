@@ -2,6 +2,7 @@ package com.paulograbin.persistence;
 
 
 import com.paulograbin.domain.notes.Note;
+import com.paulograbin.domain.EntityNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -77,13 +78,13 @@ public class InMemoryNotesDAOTest {
         assertEquals(n, returnedFromDatabase);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void givenNonExistingId__noEntityIsReturned() {
         repository.getById(3);
         fail();
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void givenNullId__noEntityIsReturned() {
         repository.getById(null);
         fail();
@@ -105,7 +106,7 @@ public class InMemoryNotesDAOTest {
         assertTrue(n.isDeleted());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void givenInvalidId__noNoteIsDeleted() {
         repository.save(new Note());
         repository.save(new Note());

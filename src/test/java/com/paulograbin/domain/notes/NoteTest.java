@@ -3,6 +3,8 @@ package com.paulograbin.domain.notes;
 import com.paulograbin.domain.EntityTest;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.Assert.*;
 
 public class NoteTest extends EntityTest<Note> {
@@ -14,7 +16,32 @@ public class NoteTest extends EntityTest<Note> {
     }
 
     @Test
-    public void NoteIsCreatedWithoutTextAndNotDeleted() {
+    public void noteIsCreatedWithLastChangedDateNull() {
+        Note note = new Note();
+
+        assertNull(note.getLastChangedDate());
+    }
+
+    @Test
+    public void afterTextIsUpdatedLastChangedDateIsSet() {
+        Note note = new Note();
+
+        LocalDateTime creationDate = note.getCreationDate();
+
+        try {
+            Thread.sleep(1L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        note.setText("olá");
+        LocalDateTime changedDate = note.getLastChangedDate();
+
+        assertNotEquals(creationDate, changedDate);
+    }
+
+    @Test
+    public void noteIsCreatedWithoutTextAndNotDeleted() {
         Note note = new Note();
 
         assertEquals("", note.getText());

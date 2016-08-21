@@ -2,8 +2,10 @@ package com.paulograbin.persistence;
 
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesDAO;
+import com.paulograbin.domain.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +29,7 @@ public class InMemoryNotesDAO implements NotesDAO {
         }
 
         notes.put(entity.getId(), entity);
+        System.out.println("Inserting note " + entity);
     }
 
     private int getNextId() {
@@ -52,18 +55,14 @@ public class InMemoryNotesDAO implements NotesDAO {
         if (n != null)
             return n;
         else
-            throw new RuntimeException("Entity not found");
+            throw new EntityNotFoundException();
     }
 
     @Override
     public void update(Note e) {
         Note saved = getById(e.getId());
 
-        if(saved != null) {
-            saved.setText(e.getText());
-        }
-        else
-            throw new RuntimeException("Entity not found");
-
+        saved.setText(e.getText());
+        saved.setLastChangedDate(LocalDateTime.now());
     }
 }

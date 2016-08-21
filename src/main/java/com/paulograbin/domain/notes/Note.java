@@ -8,6 +8,7 @@ public class Note extends Entity {
     private String text;
     private boolean deleted;
     private final LocalDateTime creationDate;
+    private LocalDateTime lastChangedDate;
 
 
     public Note() {
@@ -20,6 +21,7 @@ public class Note extends Entity {
         this.id = id;
         this.text = text;
         this.creationDate = LocalDateTime.now();
+        this.lastChangedDate = null;
     }
 
     public String getText() {
@@ -45,6 +47,7 @@ public class Note extends Entity {
                 ", text='" + text +
                 ", deleted=" + deleted +
                 ", creationDate=" + creationDate +
+                ", lastChangedDate=" + lastChangedDate +
                 "} ";
     }
 
@@ -52,4 +55,11 @@ public class Note extends Entity {
         return creationDate;
     }
 
+    public LocalDateTime getLastChangedDate() {
+        return lastChangedDate;
+    }
+
+    public void setLastChangedDate(LocalDateTime lastChangedDate) {
+        this.lastChangedDate = lastChangedDate;
+    }
 }

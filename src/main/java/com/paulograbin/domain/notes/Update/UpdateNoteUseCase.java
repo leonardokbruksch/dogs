@@ -1,6 +1,7 @@
 package com.paulograbin.domain.notes.Update;
 
 
+import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesDAO;
 
@@ -39,7 +40,7 @@ public class UpdateNoteUseCase {
         try {
             dao.update(n);
             response.success = true;
-        } catch (RuntimeException e) {
+        } catch (EntityNotFoundException e) {
             response.entityNotFound = true;
         }
     }
