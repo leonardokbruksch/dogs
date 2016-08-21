@@ -8,19 +8,19 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class InMemoryNotesDAOTest {
+public class InMemoryNotesRepositoriyTest {
 
-    InMemoryNotesDAO repository;
+    InMemoryNotesRepositoriy repository;
 
 
     @Before
     public void setUp() {
-        repository = new InMemoryNotesDAO();
+        repository = new InMemoryNotesRepositoriy();
     }
 
     @Test
     public void withEmptyRepository__mustReturnZero() {
-        repository = new InMemoryNotesDAO();
+        repository = new InMemoryNotesRepositoriy();
 
         assertEquals(0, repository.list().size());
     }

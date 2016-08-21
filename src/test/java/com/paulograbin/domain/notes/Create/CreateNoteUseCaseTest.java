@@ -1,7 +1,7 @@
 package com.paulograbin.domain.notes.Create;
 
-import com.paulograbin.domain.notes.NotesDAO;
-import com.paulograbin.persistence.InMemoryNotesDAO;
+import com.paulograbin.domain.notes.NotesRepositoriy;
+import com.paulograbin.persistence.InMemoryNotesRepositoriy;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,11 +11,11 @@ public class CreateNoteUseCaseTest {
 
     private CreateNoteRequest request;
     private CreateNoteResponse response;
-    private NotesDAO notesDAO;
+    private NotesRepositoriy repository;
 
     @Before
     public void setUp() throws Exception {
-        notesDAO = new InMemoryNotesDAO();
+        repository = new InMemoryNotesRepositoriy();
         response = new CreateNoteResponse();
     }
 
@@ -24,7 +24,7 @@ public class CreateNoteUseCaseTest {
         request = new CreateNoteRequest();
         request.text = "Olá";
 
-        new CreateNoteUseCase(notesDAO, request, response).execute();
+        new CreateNoteUseCase(repository, request, response).execute();
         Assert.assertTrue(response.success);
     }
 
@@ -32,7 +32,7 @@ public class CreateNoteUseCaseTest {
     public void givenTextIsInvalid__NoteIsNotCreated() {
         request = new CreateNoteRequest();
 
-        new CreateNoteUseCase(notesDAO, request, response).execute();
+        new CreateNoteUseCase(repository, request, response).execute();
         Assert.assertTrue(response.noText);
     }
 }

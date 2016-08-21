@@ -1,8 +1,8 @@
 package com.paulograbin.domain.notes.Delete;
 
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesDAO;
-import com.paulograbin.persistence.InMemoryNotesDAO;
+import com.paulograbin.domain.notes.NotesRepositoriy;
+import com.paulograbin.persistence.InMemoryNotesRepositoriy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,24 +13,24 @@ public class DeleteNoteUseCaseTest {
 
     private DeleteNoteRequest request;
     private DeleteNoteResponse response;
-    private NotesDAO notesDAO;
+    private NotesRepositoriy repository;
 
     @Before
     public void setUp() {
-        notesDAO = new InMemoryNotesDAO();
+        repository = new InMemoryNotesRepositoriy();
         response = new DeleteNoteResponse();
     }
 
     @Test
     public void givenValidInput__noteMustBeDeleted() {
         Note n = new Note();
-        notesDAO.save(n);
+        repository.save(n);
         assertFalse(n.isDeleted());
 
         request = new DeleteNoteRequest();
         request.setIdToDelete(n.getId());
 
-        new DeleteNoteUseCase(notesDAO, request, response).execute();
+        new DeleteNoteUseCase(repository, request, response).execute();
 
         assertTrue(n.isDeleted());
         assertTrue(response.success);
@@ -41,7 +41,7 @@ public class DeleteNoteUseCaseTest {
         request = new DeleteNoteRequest();
         request.setIdToDelete(3);
 
-        new DeleteNoteUseCase(notesDAO, request, response).execute();
+        new DeleteNoteUseCase(repository, request, response).execute();
 
         assertTrue(response.entityNotFound);
     }
@@ -51,7 +51,7 @@ public class DeleteNoteUseCaseTest {
         request = new DeleteNoteRequest();
         request.setIdToDelete(null);
 
-        new DeleteNoteUseCase(notesDAO, request, response).execute();
+        new DeleteNoteUseCase(repository, request, response).execute();
 
         assertTrue(response.invalidId);
     }
