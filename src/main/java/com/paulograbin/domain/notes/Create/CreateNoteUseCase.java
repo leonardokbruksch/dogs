@@ -1,18 +1,18 @@
 package com.paulograbin.domain.notes.Create;
 
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesDAO;
+import com.paulograbin.domain.notes.NotesRepositoriy;
 
 
 public class CreateNoteUseCase {
 
-    private final NotesDAO dao;
+    private final NotesRepositoriy repository;
     private final CreateNoteRequest request;
     private final CreateNoteResponse response;
 
 
-    public CreateNoteUseCase(NotesDAO dao, CreateNoteRequest request, CreateNoteResponse response) {
-        this.dao = dao;
+    public CreateNoteUseCase(NotesRepositoriy repository, CreateNoteRequest request, CreateNoteResponse response) {
+        this.repository = repository;
         this.request = request;
         this.response = response;
     }
@@ -29,7 +29,7 @@ public class CreateNoteUseCase {
 
         note.setText(request.text);
 
-        dao.save(note);
+        repository.save(note);
         response.success = true;
     }
 

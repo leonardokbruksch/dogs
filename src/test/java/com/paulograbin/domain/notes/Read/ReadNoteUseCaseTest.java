@@ -4,8 +4,8 @@ import com.paulograbin.domain.notes.Create.CreateNoteRequest;
 import com.paulograbin.domain.notes.Create.CreateNoteResponse;
 import com.paulograbin.domain.notes.Create.CreateNoteUseCase;
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesDAO;
-import com.paulograbin.persistence.InMemoryNotesDAO;
+import com.paulograbin.domain.notes.NotesRepositoriy;
+import com.paulograbin.persistence.InMemoryNotesRepositoriy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,12 +16,12 @@ import static org.junit.Assert.assertEquals;
 
 public class ReadNoteUseCaseTest {
 
-    private NotesDAO dao;
+    private NotesRepositoriy repository;
     private Collection<Note> response;
 
     @Before
     public void setUp() throws Exception {
-        dao = new InMemoryNotesDAO();
+        repository = new InMemoryNotesRepositoriy();
         response = new ArrayList<>();
     }
 
@@ -32,7 +32,7 @@ public class ReadNoteUseCaseTest {
     }
 
     private void whenReadingAllNotes() {
-        new ReadNotesUseCase(dao, response).execute();
+        new ReadNotesUseCase(repository, response).execute();
     }
 
     @Test
@@ -51,6 +51,6 @@ public class ReadNoteUseCaseTest {
         request.setText(text);
 
         CreateNoteResponse res = new CreateNoteResponse();
-        new CreateNoteUseCase(dao, request, res).execute();
+        new CreateNoteUseCase(repository, request, res).execute();
     }
 }

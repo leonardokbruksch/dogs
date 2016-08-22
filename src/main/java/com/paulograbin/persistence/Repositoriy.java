@@ -3,7 +3,7 @@ package com.paulograbin.persistence;
 import java.util.Collection;
 
 
-public interface DAO<T> {
+public interface Repositoriy<T> {
 
     void save(T entity);
 

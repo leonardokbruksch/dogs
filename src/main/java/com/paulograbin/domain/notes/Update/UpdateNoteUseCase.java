@@ -3,16 +3,16 @@ package com.paulograbin.domain.notes.Update;
 
 import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesDAO;
+import com.paulograbin.domain.notes.NotesRepositoriy;
 
 public class UpdateNoteUseCase {
 
-    private final NotesDAO dao;
+    private final NotesRepositoriy repository;
     private final UpdateNoteRequest request;
     private final UpdateNoteResponse response;
 
-    public UpdateNoteUseCase(NotesDAO dao, UpdateNoteRequest request, UpdateNoteResponse response) {
-        this.dao = dao;
+    public UpdateNoteUseCase(NotesRepositoriy repository, UpdateNoteRequest request, UpdateNoteResponse response) {
+        this.repository = repository;
         this.request = request;
         this.response = response;
     }
@@ -38,7 +38,7 @@ public class UpdateNoteUseCase {
         Note n = new Note(request.id, request.text);
 
         try {
-            dao.update(n);
+            repository.update(n);
             response.success = true;
         } catch (EntityNotFoundException e) {
             response.entityNotFound = true;

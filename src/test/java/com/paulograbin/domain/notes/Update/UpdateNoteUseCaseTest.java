@@ -2,9 +2,8 @@ package com.paulograbin.domain.notes.Update;
 
 
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesDAO;
-import com.paulograbin.persistence.InMemoryNotesDAO;
-import org.junit.Assert;
+import com.paulograbin.domain.notes.NotesRepositoriy;
+import com.paulograbin.persistence.InMemoryNotesRepositoriy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,24 +13,24 @@ public class UpdateNoteUseCaseTest {
 
     private UpdateNoteRequest request;
     private UpdateNoteResponse response;
-    private NotesDAO dao;
+    private NotesRepositoriy repository;
 
     @Before
     public void setUp() {
         request = new UpdateNoteRequest();
         response = new UpdateNoteResponse();
-        dao = new InMemoryNotesDAO();
+        repository = new InMemoryNotesRepositoriy();
     }
 
     @Test
     public void givenValidInput__noteMustBeUpdated() {
         Note n = new Note(3, "olá");
-        dao.save(n);
+        repository.save(n);
 
         request.setId(3);
         request.setText("olá marilene");
 
-        new UpdateNoteUseCase(dao, request, response).execute();
+        new UpdateNoteUseCase(repository, request, response).execute();
 
         assertEquals("olá marilene", n.getText());
         assertTrue(response.success);
@@ -42,7 +41,7 @@ public class UpdateNoteUseCaseTest {
         request.setId(3);
         request.setText("olá");
 
-        new UpdateNoteUseCase(dao, request, response).execute();
+        new UpdateNoteUseCase(repository, request, response).execute();
 
         assertTrue(response.entityNotFound);
     }
@@ -50,12 +49,12 @@ public class UpdateNoteUseCaseTest {
     @Test
     public void givenInvalidId__mustReturnError() {
         Note n = new Note(3, "olá");
-        dao.save(n);
+        repository.save(n);
 
         request.setId(null);
         request.setText("olá marilene");
 
-        new UpdateNoteUseCase(dao, request, response).execute();
+        new UpdateNoteUseCase(repository, request, response).execute();
 
         assertEquals("olá", n.getText());
         assertTrue(response.invalidId);
@@ -64,12 +63,12 @@ public class UpdateNoteUseCaseTest {
     @Test
     public void givenInvalidText__mustReturnError() {
         Note n = new Note(3, "olá");
-        dao.save(n);
+        repository.save(n);
 
         request.setId(3);
         request.setText("");
 
-        new UpdateNoteUseCase(dao, request, response).execute();
+        new UpdateNoteUseCase(repository, request, response).execute();
 
         assertEquals("olá", n.getText());
         assertTrue(response.invalidText);

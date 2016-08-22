@@ -8,7 +8,7 @@ import com.paulograbin.domain.notes.Delete.DeleteNoteRequest;
 import com.paulograbin.domain.notes.Delete.DeleteNoteResponse;
 import com.paulograbin.domain.notes.Delete.DeleteNoteUseCase;
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesDAO;
+import com.paulograbin.domain.notes.NotesRepositoriy;
 import com.paulograbin.domain.notes.Read.ReadNotesUseCase;
 import com.paulograbin.domain.notes.Update.UpdateNoteRequest;
 import com.paulograbin.domain.notes.Update.UpdateNoteResponse;
@@ -25,24 +25,30 @@ import java.util.Collection;
 public class NotesController {
 
     @Resource
-    NotesDAO dao;
+    NotesRepositoriy repository;
     private Gson converter = new Gson();
 
 
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody String save(CreateNoteRequest request) {
         CreateNoteResponse response = new CreateNoteResponse();
-        new CreateNoteUseCase(dao, request, response).execute();
+        new CreateNoteUseCase(repository, request, response).execute();
 
-        return converter.toJson(response);
+        String responseJSON = converter.toJson(response);
+        System.out.println(responseJSON);
+
+        return responseJSON;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody String list() {
         Collection<Note> notes = new ArrayList<>();
-        new ReadNotesUseCase(dao, notes).execute();
+        new ReadNotesUseCase(repository, notes).execute();
 
-        return converter.toJson(notes);
+        String responseJSON = converter.toJson(notes);
+        System.out.println(responseJSON);
+
+        return responseJSON;
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
@@ -51,16 +57,22 @@ public class NotesController {
         request.setIdToDelete(id);
 
         DeleteNoteResponse response = new DeleteNoteResponse();
-        new DeleteNoteUseCase(dao, request, response).execute();
+        new DeleteNoteUseCase(repository, request, response).execute();
 
-        return converter.toJson(response);
+        String responseJSON = converter.toJson(response);
+        System.out.println(responseJSON);
+
+        return responseJSON;
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.PUT)
     public @ResponseBody String update(UpdateNoteRequest request) {
         UpdateNoteResponse response = new UpdateNoteResponse();
-        new UpdateNoteUseCase(dao, request, response).execute();
+        new UpdateNoteUseCase(repository, request, response).execute();
 
-        return converter.toJson(response);
+        String responseJSON = converter.toJson(response);
+        System.out.println(responseJSON);
+
+        return responseJSON;
     }
 }

@@ -1,17 +1,17 @@
 package com.paulograbin.domain.notes.Delete;
 
-import com.paulograbin.domain.notes.NotesDAO;
+import com.paulograbin.domain.notes.NotesRepositoriy;
 import com.paulograbin.domain.EntityNotFoundException;
 
 public class DeleteNoteUseCase {
 
-    private final NotesDAO notesDAO;
+    private final NotesRepositoriy repository;
     private final DeleteNoteRequest request;
     private final DeleteNoteResponse response;
 
 
-    public DeleteNoteUseCase(NotesDAO notesDAO, DeleteNoteRequest request, DeleteNoteResponse response) {
-        this.notesDAO = notesDAO;
+    public DeleteNoteUseCase(NotesRepositoriy repository, DeleteNoteRequest request, DeleteNoteResponse response) {
+        this.repository = repository;
         this.request = request;
         this.response = response;
     }
@@ -25,7 +25,7 @@ public class DeleteNoteUseCase {
 
     private void deleteNote() {
         try {
-            notesDAO.delete(request.idToDelete);
+            repository.delete(request.idToDelete);
         } catch (EntityNotFoundException e) {
             response.entityNotFound = true;
 

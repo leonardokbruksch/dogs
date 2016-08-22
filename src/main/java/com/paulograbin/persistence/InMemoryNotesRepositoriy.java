@@ -1,7 +1,7 @@
 package com.paulograbin.persistence;
 
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesDAO;
+import com.paulograbin.domain.notes.NotesRepositoriy;
 import com.paulograbin.domain.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
 
@@ -12,12 +12,12 @@ import java.util.Map;
 
 
 @Repository
-public class InMemoryNotesDAO implements NotesDAO {
+public class InMemoryNotesRepositoriy implements NotesRepositoriy {
 
     private Map<Integer, Note> notes;
     private int lastId;
 
-    public InMemoryNotesDAO() {
+    public InMemoryNotesRepositoriy() {
         lastId = 0;
         notes = new HashMap<>();
     }
