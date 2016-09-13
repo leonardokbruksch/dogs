@@ -1,7 +1,7 @@
 package com.paulograbin.domain.notes.Create;
 
-import com.paulograbin.domain.notes.NotesRepositoriy;
-import com.paulograbin.persistence.InMemoryNotesRepositoriy;
+import com.paulograbin.domain.notes.NotesRepository;
+import com.paulograbin.persistence.InMemoryNotesRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,11 +11,11 @@ public class CreateNoteUseCaseTest {
 
     private CreateNoteRequest request;
     private CreateNoteResponse response;
-    private NotesRepositoriy repository;
+    private NotesRepository repository;
 
     @Before
     public void setUp() throws Exception {
-        repository = new InMemoryNotesRepositoriy();
+        repository = new InMemoryNotesRepository();
         response = new CreateNoteResponse();
     }
 

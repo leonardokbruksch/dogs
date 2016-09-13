@@ -1,17 +1,17 @@
 package com.paulograbin.domain.notes.Create;
 
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesRepositoriy;
+import com.paulograbin.domain.notes.NotesRepository;
 
 
 public class CreateNoteUseCase {
 
-    private final NotesRepositoriy repository;
+    private final NotesRepository repository;
     private final CreateNoteRequest request;
     private final CreateNoteResponse response;
 
 
-    public CreateNoteUseCase(NotesRepositoriy repository, CreateNoteRequest request, CreateNoteResponse response) {
+    public CreateNoteUseCase(NotesRepository repository, CreateNoteRequest request, CreateNoteResponse response) {
         this.repository = repository;
         this.request = request;
         this.response = response;

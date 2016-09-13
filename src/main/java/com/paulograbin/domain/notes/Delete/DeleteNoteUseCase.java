@@ -1,16 +1,16 @@
 package com.paulograbin.domain.notes.Delete;
 
-import com.paulograbin.domain.notes.NotesRepositoriy;
+import com.paulograbin.domain.notes.NotesRepository;
 import com.paulograbin.domain.EntityNotFoundException;
 
 public class DeleteNoteUseCase {
 
-    private final NotesRepositoriy repository;
+    private final NotesRepository repository;
     private final DeleteNoteRequest request;
     private final DeleteNoteResponse response;
 
 
-    public DeleteNoteUseCase(NotesRepositoriy repository, DeleteNoteRequest request, DeleteNoteResponse response) {
+    public DeleteNoteUseCase(NotesRepository repository, DeleteNoteRequest request, DeleteNoteResponse response) {
         this.repository = repository;
         this.request = request;
         this.response = response;

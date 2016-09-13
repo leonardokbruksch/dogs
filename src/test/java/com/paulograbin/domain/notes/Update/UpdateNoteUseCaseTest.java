@@ -2,8 +2,8 @@ package com.paulograbin.domain.notes.Update;
 
 
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesRepositoriy;
-import com.paulograbin.persistence.InMemoryNotesRepositoriy;
+import com.paulograbin.domain.notes.NotesRepository;
+import com.paulograbin.persistence.InMemoryNotesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,13 +13,13 @@ public class UpdateNoteUseCaseTest {
 
     private UpdateNoteRequest request;
     private UpdateNoteResponse response;
-    private NotesRepositoriy repository;
+    private NotesRepository repository;
 
     @Before
     public void setUp() {
         request = new UpdateNoteRequest();
         response = new UpdateNoteResponse();
-        repository = new InMemoryNotesRepositoriy();
+        repository = new InMemoryNotesRepository();
     }
 
     @Test

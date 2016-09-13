@@ -4,8 +4,8 @@ import com.paulograbin.domain.notes.Create.CreateNoteRequest;
 import com.paulograbin.domain.notes.Create.CreateNoteResponse;
 import com.paulograbin.domain.notes.Create.CreateNoteUseCase;
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesRepositoriy;
-import com.paulograbin.persistence.InMemoryNotesRepositoriy;
+import com.paulograbin.domain.notes.NotesRepository;
+import com.paulograbin.persistence.InMemoryNotesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,13 +16,13 @@ import static org.junit.Assert.assertEquals;
 
 public class ReadNoteUseCaseTest {
 
-    private NotesRepositoriy repository;
-    private Collection<Note> response;
+    private NotesRepository repository;
+    private ReadNotesResponse response;
 
     @Before
     public void setUp() throws Exception {
-        repository = new InMemoryNotesRepositoriy();
-        response = new ArrayList<>();
+        repository = new InMemoryNotesRepository();
+        response = new ReadNotesResponse();
     }
 
     @Test

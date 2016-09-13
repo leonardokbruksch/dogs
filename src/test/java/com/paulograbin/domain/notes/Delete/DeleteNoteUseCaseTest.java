@@ -1,8 +1,8 @@
 package com.paulograbin.domain.notes.Delete;
 
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesRepositoriy;
-import com.paulograbin.persistence.InMemoryNotesRepositoriy;
+import com.paulograbin.domain.notes.NotesRepository;
+import com.paulograbin.persistence.InMemoryNotesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,11 +13,11 @@ public class DeleteNoteUseCaseTest {
 
     private DeleteNoteRequest request;
     private DeleteNoteResponse response;
-    private NotesRepositoriy repository;
+    private NotesRepository repository;
 
     @Before
     public void setUp() {
-        repository = new InMemoryNotesRepositoriy();
+        repository = new InMemoryNotesRepository();
         response = new DeleteNoteResponse();
     }
 

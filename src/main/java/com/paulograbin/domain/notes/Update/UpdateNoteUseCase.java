@@ -3,15 +3,15 @@ package com.paulograbin.domain.notes.Update;
 
 import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesRepositoriy;
+import com.paulograbin.domain.notes.NotesRepository;
 
 public class UpdateNoteUseCase {
 
-    private final NotesRepositoriy repository;
+    private final NotesRepository repository;
     private final UpdateNoteRequest request;
     private final UpdateNoteResponse response;
 
-    public UpdateNoteUseCase(NotesRepositoriy repository, UpdateNoteRequest request, UpdateNoteResponse response) {
+    public UpdateNoteUseCase(NotesRepository repository, UpdateNoteRequest request, UpdateNoteResponse response) {
         this.repository = repository;
         this.request = request;
         this.response = response;
