@@ -1,9 +1,9 @@
-package com.paulograbin.persistence;
+package com.paulograbin.domain;
 
 import java.util.Collection;
 
 
-public interface Repositoriy<T> {
+public interface Repository<T> {
 
     void save(T entity);
 

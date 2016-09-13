@@ -8,19 +8,19 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class InMemoryNotesRepositoriyTest {
+public class InMemoryNotesRepositoryTest {
 
-    InMemoryNotesRepositoriy repository;
+    InMemoryNotesRepository repository;
 
 
     @Before
     public void setUp() {
-        repository = new InMemoryNotesRepositoriy();
+        repository = new InMemoryNotesRepository();
     }
 
     @Test
     public void withEmptyRepository__mustReturnZero() {
-        repository = new InMemoryNotesRepositoriy();
+        repository = new InMemoryNotesRepository();
 
         assertEquals(0, repository.list().size());
     }

@@ -1,8 +1,8 @@
 package com.paulograbin.persistence;
 
 import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesRepositoriy;
 import com.paulograbin.domain.EntityNotFoundException;
+import com.paulograbin.domain.notes.NotesRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -12,12 +12,12 @@ import java.util.Map;
 
 
 @Repository
-public class InMemoryNotesRepositoriy implements NotesRepositoriy {
+public class InMemoryNotesRepository implements NotesRepository {
 
     private Map<Integer, Note> notes;
     private int lastId;
 
-    public InMemoryNotesRepositoriy() {
+    public InMemoryNotesRepository() {
         lastId = 0;
         notes = new HashMap<>();
     }
