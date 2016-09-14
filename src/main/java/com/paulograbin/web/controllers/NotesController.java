@@ -7,17 +7,17 @@ import com.paulograbin.domain.notes.Create.CreateNoteUseCase;
 import com.paulograbin.domain.notes.Delete.DeleteNoteRequest;
 import com.paulograbin.domain.notes.Delete.DeleteNoteResponse;
 import com.paulograbin.domain.notes.Delete.DeleteNoteUseCase;
-import com.paulograbin.domain.notes.Note;
-import com.paulograbin.domain.notes.NotesRepositoriy;
+import com.paulograbin.domain.notes.NotesRepository;
+import com.paulograbin.domain.notes.Read.ReadNotesResponse;
 import com.paulograbin.domain.notes.Read.ReadNotesUseCase;
+import com.paulograbin.domain.notes.ResponseWrapper;
 import com.paulograbin.domain.notes.Update.UpdateNoteRequest;
 import com.paulograbin.domain.notes.Update.UpdateNoteResponse;
 import com.paulograbin.domain.notes.Update.UpdateNoteUseCase;
+import com.paulograbin.web.crypto.EtagGenerator;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Collection;
 
 @CrossOrigin
 @RestController
@@ -25,7 +25,7 @@ import java.util.Collection;
 public class NotesController {
 
     @Resource
-    NotesRepositoriy repository;
+    NotesRepository repository;
     private Gson converter = new Gson();
 
 
