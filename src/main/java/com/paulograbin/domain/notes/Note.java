@@ -1,7 +1,9 @@
 package com.paulograbin.domain.notes;
 
 
-import java.time.LocalDateTime;
+import com.paulograbin.domain.DateTimeFactory;
+
+import java.time.*;
 
 public class Note extends Entity {
 
@@ -20,7 +22,7 @@ public class Note extends Entity {
 
         this.id = id;
         this.text = text;
-        this.creationDate = LocalDateTime.now();
+        this.creationDate = new DateTimeFactory().getCurrentUTCTime();
         this.lastChangedDate = null;
     }
 

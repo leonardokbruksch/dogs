@@ -42,13 +42,17 @@ public class NotesController {
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody String list() {
-        Collection<Note> notes = new ArrayList<>();
-        new ReadNotesUseCase(repository, notes).execute();
+        ReadNotesResponse response = new ReadNotesResponse();
+        new ReadNotesUseCase(repository, response).execute();
 
-        String responseJSON = converter.toJson(notes);
-        System.out.println(responseJSON);
+        return FillResponseWithGETWrapper(response);
+    }
 
-        return responseJSON;
+    private String FillResponseWithGETWrapper(ResponseWrapper responseWrapper) {
+        ResponseData responseData = new ResponseData(responseWrapper);
+        ResponseMetadata metadata = new ResponseMetadata(new EtagGenerator(), responseData);
+
+        return converter.toJson(metadata);
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)

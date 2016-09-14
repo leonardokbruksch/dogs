@@ -1,9 +1,6 @@
 package com.paulograbin.domain.notes.Read;
 
-import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
-
-import java.util.Collection;
 
 
 public class ReadNotesUseCase {

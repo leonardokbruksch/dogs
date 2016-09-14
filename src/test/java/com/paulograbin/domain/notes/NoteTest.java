@@ -4,6 +4,7 @@ import com.paulograbin.domain.EntityTest;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import static org.junit.Assert.*;
 

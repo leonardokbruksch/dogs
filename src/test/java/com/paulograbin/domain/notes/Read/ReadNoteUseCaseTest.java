@@ -43,7 +43,7 @@ public class ReadNoteUseCaseTest {
     }
 
     private void thenSizeMustBe(int expected) {
-        assertEquals(expected, response.size());
+        assertEquals(expected, response.getResponseSize());
     }
 
     private void givenANote(String text) {

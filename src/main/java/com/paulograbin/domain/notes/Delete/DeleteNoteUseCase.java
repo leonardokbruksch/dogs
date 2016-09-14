@@ -40,6 +40,6 @@ public class DeleteNoteUseCase {
     }
 
     private boolean isRequestValid() {
-        return (request.idToDelete != null) ? true : false;
+        return (request.idToDelete != null);
     }
 }

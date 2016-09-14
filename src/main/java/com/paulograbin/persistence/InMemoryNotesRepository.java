@@ -1,20 +1,18 @@
 package com.paulograbin.persistence;
 
-import com.paulograbin.domain.notes.Note;
+import com.paulograbin.domain.DateTimeFactory;
 import com.paulograbin.domain.EntityNotFoundException;
+import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
-import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 
-@Repository
 public class InMemoryNotesRepository implements NotesRepository {
 
-    private Map<Integer, Note> notes;
+    private final Map<Integer, Note> notes;
     private int lastId;
 
     public InMemoryNotesRepository() {
@@ -63,6 +61,6 @@ public class InMemoryNotesRepository implements NotesRepository {
         Note saved = getById(e.getId());
 
         saved.setText(e.getText());
-        saved.setLastChangedDate(LocalDateTime.now());
+        saved.setLastChangedDate(new DateTimeFactory().getCurrentUTCTime());
     }
 }
