@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@Repository
+//@Repository
 public class InMemoryNotesRepository implements NotesRepository {
 
     private Map<Integer, Note> notes;
@@ -42,14 +42,22 @@ public class InMemoryNotesRepository implements NotesRepository {
     }
 
     @Override
-    public void delete(int idToDelete) {
+    public void delete(Integer idToDelete) {
         Note n = getById(idToDelete);
 
         n.setDeleted();
     }
 
     @Override
+    public void deleteAll() {
+        notes.clear();
+    }
+
+    @Override
     public Note getById(Integer id) {
+        if(id == null)
+            throw new IllegalArgumentException();
+
         Note n = notes.get(id);
 
         if (n != null)
