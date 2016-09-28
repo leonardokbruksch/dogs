@@ -19,10 +19,6 @@ public class ReadNotesResponse extends ResponseWrapper {
         notes.add(note);
     }
 
-    public int getResponseSize() {
-        return notes.size();
-    }
-
     @Override
     public int getItemsCount() {
         return notes.size();
