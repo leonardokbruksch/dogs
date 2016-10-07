@@ -1,26 +1,26 @@
 package com.paulograbin.persistence;
 
-import com.paulograbin.domain.notes.Note;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
 public class FileSystemRepositoryCreatorTest {
 
-    private final String path = "/Users/i841059/Desktop";
+    private String path;
     private final String directoryName = "/OEditor_uploads/";
     private FileSystemRepositoryCreator creator;
     private File repositoryDirectory;
 
     @Before
     public void setUp() {
+        path = System.getProperties().getProperty("user.home");
+
         repositoryDirectory = new File(path + directoryName);
         creator = new FileSystemRepositoryCreator(repositoryDirectory);
     }
