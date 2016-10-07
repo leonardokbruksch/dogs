@@ -31,6 +31,7 @@ public class CreateNoteUseCase {
 
         repository.save(note);
         response.success = true;
+        response.entity = note;
     }
 
     private void returnErrors() {

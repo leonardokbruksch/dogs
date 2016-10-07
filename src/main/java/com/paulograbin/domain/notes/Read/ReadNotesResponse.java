@@ -10,12 +10,13 @@ import java.util.Collection;
 public class ReadNotesResponse extends ResponseWrapper {
 
     Collection<Note> notes;
+    Iterable<Note> i;
 
     public ReadNotesResponse() {
         notes = new ArrayList<>();
     }
 
-    public void insertNote(Note note) {
+    public void insertItem(Note note) {
         notes.add(note);
     }
 

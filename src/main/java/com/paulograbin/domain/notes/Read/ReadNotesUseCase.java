@@ -14,6 +14,6 @@ public class ReadNotesUseCase {
     }
 
     public void execute() {
-        repository.list().forEach(response::insertNote);
+        repository.list().forEach(response::insertItem);
     }
 }

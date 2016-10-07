@@ -15,13 +15,15 @@ import com.paulograbin.domain.notes.Update.UpdateNoteRequest;
 import com.paulograbin.domain.notes.Update.UpdateNoteResponse;
 import com.paulograbin.domain.notes.Update.UpdateNoteUseCase;
 import com.paulograbin.web.crypto.EtagGenerator;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/notes")
+@RequestMapping(value = "/notes", produces = "application/json; charset=utf-8")
 public class NotesController {
 
     @Resource
@@ -30,18 +32,20 @@ public class NotesController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody String save(CreateNoteRequest request) {
+    public String save(CreateNoteRequest request, HttpServletResponse res) {
         CreateNoteResponse response = new CreateNoteResponse();
         new CreateNoteUseCase(repository, request, response).execute();
 
         String responseJSON = converter.toJson(response);
-        System.out.println(responseJSON);
+
+        res.setHeader("location", "/notes/" + response.entity.getId());
+        res.setStatus(HttpStatus.CREATED.value());
 
         return responseJSON;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody String list() {
+    public String list() {
         ReadNotesResponse response = new ReadNotesResponse();
         new ReadNotesUseCase(repository, response).execute();
 
@@ -56,7 +60,7 @@ public class NotesController {
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-    public @ResponseBody String delete(@PathVariable("id") int id) {
+    public String delete(@PathVariable("id") int id) {
         DeleteNoteRequest request = new DeleteNoteRequest();
         request.setIdToDelete(id);
 
@@ -70,7 +74,7 @@ public class NotesController {
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.PUT)
-    public @ResponseBody String update(UpdateNoteRequest request) {
+    public String update(UpdateNoteRequest request) {
         UpdateNoteResponse response = new UpdateNoteResponse();
         new UpdateNoteUseCase(repository, request, response).execute();
 
