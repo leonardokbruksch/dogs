@@ -2,23 +2,20 @@ package com.paulograbin.persistence;
 
 
 import com.paulograbin.domain.EntityNotFoundException;
-import com.paulograbin.domain.Repository;
 import com.paulograbin.domain.notes.Note;
+import com.paulograbin.domain.notes.NotesRepository;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public abstract class RepositoryTest<T> {
+public abstract class RepositoryTest {
 
-    protected Repository repository;
+    protected NotesRepository repository;
 
 
-    protected abstract Repository makeRepository();
-    protected void assertNoteCountIs(int expectedSize) {
-        assertEquals(expectedSize, repository.list().size());
-    }
+    protected abstract NotesRepository makeRepository();
+
 
     @Before
     public void setUp() {
@@ -81,7 +78,7 @@ public abstract class RepositoryTest<T> {
         repository.save(n);
         repository.save(m);
 
-        Note returnedFromDatabase = (Note) repository.getById(3);
+        Note returnedFromDatabase = repository.getById(3);
 
         assertEquals(n, returnedFromDatabase);
     }
@@ -103,7 +100,6 @@ public abstract class RepositoryTest<T> {
     * DELETE
     */
     @Test
-    @Ignore
     public void givenValidId__noteShouldBeDeleted() {
         Note n = new Note(1, "olá");
         repository.save(n);
@@ -112,6 +108,7 @@ public abstract class RepositoryTest<T> {
 
         repository.delete(1);
 
+        n = repository.getById(n.getId());
         assertTrue(n.isDeleted());
     }
 
@@ -142,5 +139,28 @@ public abstract class RepositoryTest<T> {
         repository.delete(null);
 
         assertNoteCountIs(2);
+    }
+
+    /*
+     * UPDATE
+     */
+    @Test
+    public void givenValidInput__noteIsUpdated() {
+        Note n = new Note(3, "olá");
+
+        repository.save(n);
+        assertNoteCountIs(1);
+
+        Note another = new Note(3, "olá marilene");
+        repository.update(another);
+
+        n = repository.getById(n.getId());
+
+        assertEquals("olá marilene", n.getText());
+    }
+
+
+    protected void assertNoteCountIs(int expectedSize) {
+        assertEquals(expectedSize, repository.list().size());
     }
 }

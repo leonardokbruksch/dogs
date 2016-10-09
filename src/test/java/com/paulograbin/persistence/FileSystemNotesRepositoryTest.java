@@ -1,18 +1,13 @@
 package com.paulograbin.persistence;
 
-import com.paulograbin.domain.Repository;
-import com.paulograbin.domain.notes.Note;
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
+import com.paulograbin.domain.notes.NotesRepository;
 
 
-public class FileSystemNotesRepositoryTest extends RepositoryTest<Note> {
+public class FileSystemNotesRepositoryTest extends RepositoryTest {
 
     @Override
-    protected Repository makeRepository() {
-        FileSystemNotesRepository repository = new FileSystemNotesRepository("/Users/i841059/Desktop");
+    protected NotesRepository makeRepository() {
+        FileSystemNotesRepository repository = new FileSystemNotesRepository();
         repository.deleteAll();
 
         return repository;

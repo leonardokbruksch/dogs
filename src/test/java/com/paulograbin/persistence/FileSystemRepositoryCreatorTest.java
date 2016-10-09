@@ -19,7 +19,7 @@ public class FileSystemRepositoryCreatorTest {
 
     @Before
     public void setUp() {
-        path = System.getProperties().getProperty("user.home");
+        path = System.getProperty("user.home");
 
         repositoryDirectory = new File(path + directoryName);
         creator = new FileSystemRepositoryCreator(repositoryDirectory);

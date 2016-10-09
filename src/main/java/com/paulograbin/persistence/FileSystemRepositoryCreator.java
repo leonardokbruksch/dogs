@@ -21,9 +21,6 @@ public class FileSystemRepositoryCreator {
     }
 
     public boolean isRepositoryReady() {
-        if(repository.exists() && repository.canWrite())
-            return true;
-        else
-            return false;
+        return repository.exists() && repository.canWrite();
     }
 }

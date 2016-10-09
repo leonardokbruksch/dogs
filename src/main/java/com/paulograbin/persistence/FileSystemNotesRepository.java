@@ -4,13 +4,12 @@ import com.google.gson.Gson;
 import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,10 +27,11 @@ public class FileSystemNotesRepository implements NotesRepository {
 
     private Gson converter;
 
-    @Autowired
-    public FileSystemNotesRepository(@Value("${repository.basePath}") String basePath) {
+
+    public FileSystemNotesRepository() {
         converter = new Gson();
 
+        String basePath = System.getProperty("user.home");
         repository = new File(basePath + DIRECTORY_NAME);
 
         FileSystemRepositoryCreator repoCreator = new FileSystemRepositoryCreator(repository);
@@ -48,6 +48,10 @@ public class FileSystemNotesRepository implements NotesRepository {
         if(entity.getId() == null)
             entity.setId(getNextId());
 
+        writeContentToFile(entity);
+    }
+
+    private void writeContentToFile(Note entity) {
         String filePath = makeNewNoteFileName(entity.getId());
         File newNoteFile = new File(filePath);
 
@@ -100,10 +104,8 @@ public class FileSystemNotesRepository implements NotesRepository {
         return repository.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                if(name.endsWith(FILE_EXTENSION))
-                    return true;
+                return name.endsWith(FILE_EXTENSION);
 
-                return false;
             }
         });
     }
@@ -118,10 +120,8 @@ public class FileSystemNotesRepository implements NotesRepository {
         File[] file = repository.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                if(name.equals(noteFileName))
-                    return true;
+                return name.equals(noteFileName);
 
-                return false;
             }
         });
 
@@ -172,6 +172,11 @@ public class FileSystemNotesRepository implements NotesRepository {
 
     @Override
     public void update(Note entity) {
-        save(entity);
+        Note noteBeingUpdated = getById(entity.getId());
+
+        noteBeingUpdated.setText(entity.getText());
+        noteBeingUpdated.setLastChangedDate(LocalDateTime.now());
+
+        writeContentToFile(noteBeingUpdated);
     }
 }
