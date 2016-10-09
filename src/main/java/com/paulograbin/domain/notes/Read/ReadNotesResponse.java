@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public class ReadNotesResponse extends ResponseWrapper {
 
-    Collection<Note> notes;
+    final Collection<Note> notes;
     Iterable<Note> i;
 
 

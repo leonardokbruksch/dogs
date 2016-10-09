@@ -4,7 +4,6 @@ import com.paulograbin.domain.DateTimeFactory;
 import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.HashMap;

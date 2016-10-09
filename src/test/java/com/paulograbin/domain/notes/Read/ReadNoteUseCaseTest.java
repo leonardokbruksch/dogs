@@ -3,14 +3,10 @@ package com.paulograbin.domain.notes.Read;
 import com.paulograbin.domain.notes.Create.CreateNoteRequest;
 import com.paulograbin.domain.notes.Create.CreateNoteResponse;
 import com.paulograbin.domain.notes.Create.CreateNoteUseCase;
-import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
 import com.paulograbin.persistence.InMemoryNotesRepository;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 

@@ -6,9 +6,9 @@ import com.paulograbin.domain.notes.ResponseWrapper;
 
 public class ResponseData {
 
-    private int offset;
-    private int limit;
-    private int total;
+//    private int offset;
+//    private int limit;
+//    private int total;
     private int count;
 
     private ResponseWrapper result;
@@ -16,9 +16,9 @@ public class ResponseData {
     public ResponseData(ResponseWrapper responseWrapper) {
         this.result = responseWrapper;
 
-        this.offset = 0;
-        this.limit = 0;
-        this.total = 0;
+//        this.offset = 0;
+//        this.limit = 0;
+//        this.total = 0;
         this.count = responseWrapper.getItemsCount();
     }
 
