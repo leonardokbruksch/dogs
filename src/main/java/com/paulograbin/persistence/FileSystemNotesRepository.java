@@ -161,7 +161,8 @@ public class FileSystemNotesRepository implements NotesRepository {
 
         Note n = getById(idToDelete);
         n.setDeleted();
-        update(n);
+
+        writeContentToFile(n);
     }
 
     @Override
