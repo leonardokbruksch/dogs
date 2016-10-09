@@ -56,8 +56,7 @@ public class FileSystemNotesRepository implements NotesRepository {
         File newNoteFile = new File(filePath);
 
         try {
-            if(!newNoteFile.exists())
-                newNoteFile.createNewFile();
+            createFileIfNotExists(newNoteFile);
 
             FileWriter fw = new FileWriter(newNoteFile);
             fw.write(converter.toJson(entity));
@@ -66,6 +65,11 @@ public class FileSystemNotesRepository implements NotesRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void createFileIfNotExists(File newNoteFile) throws IOException {
+        if(!newNoteFile.exists())
+            newNoteFile.createNewFile();
     }
 
     private String makeNewNoteFileName(Integer noteId) {
