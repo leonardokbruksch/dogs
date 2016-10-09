@@ -12,9 +12,11 @@ public class ReadNotesResponse extends ResponseWrapper {
     Collection<Note> notes;
     Iterable<Note> i;
 
+
     public ReadNotesResponse() {
         notes = new ArrayList<>();
     }
+
 
     public void insertItem(Note note) {
         notes.add(note);

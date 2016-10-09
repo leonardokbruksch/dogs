@@ -9,7 +9,9 @@ public interface Repository<T> {
 
     Collection<T> list();
 
-    void delete(int idToDelete);
+    void delete(Integer idToDelete);
+
+    void deleteAll();
 
     T getById(Integer id);
 

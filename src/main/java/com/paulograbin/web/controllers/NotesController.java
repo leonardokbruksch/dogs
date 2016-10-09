@@ -20,13 +20,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.inject.Inject;
 
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/notes", produces = "application/json; charset=utf-8")
 public class NotesController {
 
-    @Resource
+    @Inject
     NotesRepository repository;
     private Gson converter = new Gson();
 

@@ -64,4 +64,18 @@ public class Note extends Entity {
     public void setLastChangedDate(LocalDateTime lastChangedDate) {
         this.lastChangedDate = lastChangedDate;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Note note = (Note) o;
+
+        if (id != note.id) return false;
+        if (deleted != note.deleted) return false;
+        if (text != null ? !text.equals(note.text) : note.text != null) return false;
+        if (!creationDate.equals(note.creationDate)) return false;
+        return lastChangedDate != null ? lastChangedDate.equals(note.lastChangedDate) : note.lastChangedDate == null;
+    }
 }
