@@ -39,9 +39,6 @@ public class NotesController {
 
         String responseJSON = converter.toJson(response);
 
-        res.setHeader("location", "/notes/" + response.entity.getId());
-        res.setStatus(HttpStatus.CREATED.value());
-
         return responseJSON;
     }
 
