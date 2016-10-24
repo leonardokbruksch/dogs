@@ -42,17 +42,6 @@ public class Note extends Entity {
         this.deleted = true;
     }
 
-    @Override
-    public String toString() {
-        return "Note{" +
-                "id=" + id +
-                ", text='" + text +
-                ", deleted=" + deleted +
-                ", creationDate=" + creationDate +
-                ", lastChangedDate=" + lastChangedDate +
-                "} ";
-    }
-
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
@@ -77,5 +66,16 @@ public class Note extends Entity {
         if (text != null ? !text.equals(note.text) : note.text != null) return false;
         if (!creationDate.equals(note.creationDate)) return false;
         return lastChangedDate != null ? lastChangedDate.equals(note.lastChangedDate) : note.lastChangedDate == null;
+    }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "id=" + id +
+                ", text='" + text +
+                ", deleted=" + deleted +
+                ", creationDate=" + creationDate +
+                ", lastChangedDate=" + lastChangedDate +
+                "} ";
     }
 }

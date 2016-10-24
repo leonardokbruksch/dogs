@@ -23,7 +23,7 @@ public abstract class RepositoryTest {
     }
 
     @Test
-    public void withEmptyRepository__mustReturnZero() {
+    public void withEmptyRepository__noteCountMustBeZero() {
         repository = makeRepository();
 
         assertNoteCountIs(0);
@@ -33,7 +33,7 @@ public abstract class RepositoryTest {
      * SAVE
      */
     @Test
-    public void givenANoteIsSaved__sizeMustBeOne() {
+    public void givenANoteIsSaved__noteCountMustBeOne() {
         repository.save(new Note());
 
         assertNoteCountIs(1);
