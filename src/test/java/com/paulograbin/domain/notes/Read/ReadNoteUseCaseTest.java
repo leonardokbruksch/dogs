@@ -3,10 +3,13 @@ package com.paulograbin.domain.notes.Read;
 import com.paulograbin.domain.notes.Create.CreateNoteRequest;
 import com.paulograbin.domain.notes.Create.CreateNoteResponse;
 import com.paulograbin.domain.notes.Create.CreateNoteUseCase;
+import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
 import com.paulograbin.persistence.InMemoryNotesRepository;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,10 +30,6 @@ public class ReadNoteUseCaseTest {
         thenSizeMustBe(0);
     }
 
-    private void whenReadingAllNotes() {
-        new ReadNotesUseCase(repository, response).execute();
-    }
-
     @Test
     public void WithOneNote__mustReturnOne() {
         givenANote("Olá Marilene");
@@ -38,8 +37,17 @@ public class ReadNoteUseCaseTest {
         thenSizeMustBe(1);
     }
 
-    private void thenSizeMustBe(int expected) {
-        assertEquals(expected, response.getItemsCount());
+    @Test
+    public void withMoreThanOneNote__mustReturnInReverseCreationOrder() throws Exception {
+        givenANote("First note");
+        Thread.sleep(10L); // Sleep in order to make sure Notes are created in two separated moments
+        givenANote("Second note");
+
+        whenReadingAllNotes();
+
+        ArrayList<Note> notes = new ArrayList<>(response.notes);
+        assertEquals(notes.get(0).getText(), "Second note");
+        assertEquals(notes.get(1).getText(), "First note");
     }
 
     private void givenANote(String text) {
@@ -48,5 +56,13 @@ public class ReadNoteUseCaseTest {
 
         CreateNoteResponse res = new CreateNoteResponse();
         new CreateNoteUseCase(repository, request, res).execute();
+    }
+
+    private void whenReadingAllNotes() {
+        new ReadNotesUseCase(repository, response).execute();
+    }
+
+    private void thenSizeMustBe(int expected) {
+        assertEquals(expected, response.getItemsCount());
     }
 }
