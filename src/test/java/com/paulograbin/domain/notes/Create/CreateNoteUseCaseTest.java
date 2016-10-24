@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 
 public class CreateNoteUseCaseTest {
 
@@ -25,7 +27,7 @@ public class CreateNoteUseCaseTest {
         request.text = "Olá";
 
         new CreateNoteUseCase(repository, request, response).execute();
-        Assert.assertTrue(response.success);
+        assertTrue(response.success);
     }
 
     @Test
@@ -33,6 +35,6 @@ public class CreateNoteUseCaseTest {
         request = new CreateNoteRequest();
 
         new CreateNoteUseCase(repository, request, response).execute();
-        Assert.assertTrue(response.noText);
+        assertTrue(response.noText);
     }
 }

@@ -37,6 +37,20 @@ public class UpdateNoteUseCaseTest {
     }
 
     @Test
+    public void givenValidInput__afterUpdateNoteMustHaveChangedDate() {
+        Note n = new Note(77, "Test text");
+        assertNull(n.getLastChangedDate());
+        repository.save(n);
+
+        request.setId(77);
+        request.setText("Some new random text");
+        new UpdateNoteUseCase(repository, request, response).execute();
+
+        n = repository.getById(n.getId());
+        assertNotNull(n.getLastChangedDate());
+    }
+
+    @Test
     public void givenValidInputButInvalidEntity__mustReturnError() {
         request.setId(3);
         request.setText("olá");

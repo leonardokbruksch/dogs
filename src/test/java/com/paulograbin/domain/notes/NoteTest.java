@@ -4,9 +4,9 @@ import com.paulograbin.domain.EntityTest;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 
 import static org.junit.Assert.*;
+
 
 public class NoteTest extends EntityTest<Note> {
 
@@ -21,24 +21,6 @@ public class NoteTest extends EntityTest<Note> {
         Note note = new Note();
 
         assertNull(note.getLastChangedDate());
-    }
-
-    @Test
-    public void afterTextIsUpdatedLastChangedDateIsSet() {
-        Note note = new Note();
-
-        LocalDateTime creationDate = note.getCreationDate();
-
-        try {
-            Thread.sleep(1L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        note.setText("olá");
-        LocalDateTime changedDate = note.getLastChangedDate();
-
-        assertNotEquals(creationDate, changedDate);
     }
 
     @Test
@@ -63,6 +45,27 @@ public class NoteTest extends EntityTest<Note> {
         note.setDeleted();
 
         assertTrue(note.isDeleted());
+    }
+
+    @Test
+    public void testNoteIsEqualToItself() {
+        Note n = new Note();
+        Note m = n;
+
+        assertTrue(n.equals(m));
+    }
+
+    @Test
+    public void testNotesWithSameContentAreEqual() {
+        LocalDateTime now = LocalDateTime.now();
+
+        Note n = new Note(13, "Some random test");
+        n.setLastChangedDate(now);
+
+        Note m = new Note(13, "Some random test");
+        m.setLastChangedDate(now);
+
+        assertTrue(n.equals(m));
     }
 
     @Override

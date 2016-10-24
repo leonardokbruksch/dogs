@@ -5,6 +5,9 @@ import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+
 public class UpdateNoteUseCase {
 
     private final NotesRepository repository;
@@ -35,10 +38,13 @@ public class UpdateNoteUseCase {
     }
 
     private void update() {
-        Note n = new Note(request.id, request.text);
-
         try {
-            repository.update(n);
+            Note note = repository.getById(request.id);
+
+            note.setText(request.text);
+            note.setLastChangedDate(LocalDateTime.now());
+
+            repository.update(note);
             response.success = true;
         } catch (EntityNotFoundException e) {
             response.entityNotFound = true;

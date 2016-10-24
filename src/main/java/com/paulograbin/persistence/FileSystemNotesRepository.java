@@ -4,18 +4,17 @@ import com.google.gson.Gson;
 import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 
-@Component
+@Repository
 public class FileSystemNotesRepository implements NotesRepository {
 
     private final String DIRECTORY_NAME = "/OEditor_uploads/";
@@ -105,13 +104,7 @@ public class FileSystemNotesRepository implements NotesRepository {
     }
 
     private File[] getAllNoteFilesFromRepositoryDirectory() {
-        return repository.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(FILE_EXTENSION);
-
-            }
-        });
+        return repository.listFiles((dir, name) -> name.endsWith(FILE_EXTENSION));
     }
 
     @Override
@@ -121,13 +114,7 @@ public class FileSystemNotesRepository implements NotesRepository {
 
         String noteFileName = id + FILE_EXTENSION;
 
-        File[] file = repository.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.equals(noteFileName);
-
-            }
-        });
+        File[] file = repository.listFiles((dir, name) -> name.equals(noteFileName));
 
         if(file.length == 1) {
             try {
@@ -180,7 +167,6 @@ public class FileSystemNotesRepository implements NotesRepository {
         Note noteBeingUpdated = getById(entity.getId());
 
         noteBeingUpdated.setText(entity.getText());
-        noteBeingUpdated.setLastChangedDate(LocalDateTime.now());
 
         writeContentToFile(noteBeingUpdated);
     }
