@@ -2,7 +2,6 @@ package com.paulograbin.domain.notes.Create;
 
 import com.paulograbin.domain.notes.NotesRepository;
 import com.paulograbin.persistence.InMemoryNotesRepository;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

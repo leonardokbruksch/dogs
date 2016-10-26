@@ -87,8 +87,6 @@ public class FileSystemNotesRepository implements NotesRepository {
         for (File file : getAllNoteFilesFromRepositoryDirectory()) {
             try {
                 notes.add(getNoteFromFile(file));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }

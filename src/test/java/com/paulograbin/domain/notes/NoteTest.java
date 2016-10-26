@@ -50,9 +50,8 @@ public class NoteTest extends EntityTest<Note> {
     @Test
     public void testNoteIsEqualToItself() {
         Note n = new Note();
-        Note m = n;
 
-        assertTrue(n.equals(m));
+        assertTrue(n.equals(n));
     }
 
     @Test

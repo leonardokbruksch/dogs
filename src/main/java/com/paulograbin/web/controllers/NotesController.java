@@ -15,12 +15,10 @@ import com.paulograbin.domain.notes.Update.UpdateNoteRequest;
 import com.paulograbin.domain.notes.Update.UpdateNoteResponse;
 import com.paulograbin.domain.notes.Update.UpdateNoteUseCase;
 import com.paulograbin.web.crypto.EtagGenerator;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 @CrossOrigin
 @RestController
@@ -37,9 +35,7 @@ public class NotesController {
         CreateNoteResponse response = new CreateNoteResponse();
         new CreateNoteUseCase(repository, request, response).execute();
 
-        String responseJSON = converter.toJson(response);
-
-        return responseJSON;
+        return converter.toJson(response);
     }
 
     @RequestMapping(method = RequestMethod.GET)

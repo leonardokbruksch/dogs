@@ -5,10 +5,9 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import java.io.IOException;
-import java.util.function.Consumer;
 
 @Component
-public class LogFilter implements Filter {
+class LogFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -18,8 +17,11 @@ public class LogFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String ipAddress = request.getRemoteHost();
-        String userAgent = ((RequestFacade) request).getHeader("user-agent");
-        String url = ((RequestFacade) request).getRequestURL().toString();
+
+        RequestFacade req = (RequestFacade) request;
+
+        String userAgent = req.getHeader("user-agent");
+        String url = req.getRequestURL().toString();
 
         System.out.println(url + " - " + ipAddress + " - " + userAgent);
 

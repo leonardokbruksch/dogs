@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.time.*;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
 
 public class DateTimeFactoryTest {
 

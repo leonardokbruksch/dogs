@@ -1,10 +1,6 @@
 package com.paulograbin.web.controllers;
 
 import com.paulograbin.web.crypto.EtagGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.beans.Transient;
 
 
 public class ResponseMetadata {

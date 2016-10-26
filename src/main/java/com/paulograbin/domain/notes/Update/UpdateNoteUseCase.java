@@ -1,12 +1,10 @@
 package com.paulograbin.domain.notes.Update;
 
 
+import com.paulograbin.domain.DateTimeFactory;
 import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
 
 public class UpdateNoteUseCase {
 
@@ -42,7 +40,7 @@ public class UpdateNoteUseCase {
             Note note = repository.getById(request.id);
 
             note.setText(request.text);
-            note.setLastChangedDate(LocalDateTime.now());
+            note.setLastChangedDate(new DateTimeFactory().getCurrentUTCTime());
 
             repository.update(note);
             response.success = true;

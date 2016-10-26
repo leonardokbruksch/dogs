@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public abstract class EntityTest<T extends Entity> {
 
-    T entity;
+    private T entity;
 
 
     protected abstract T makeOne();
