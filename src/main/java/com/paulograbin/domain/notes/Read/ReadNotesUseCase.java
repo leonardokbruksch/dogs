@@ -3,7 +3,6 @@ package com.paulograbin.domain.notes.Read;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -25,7 +24,7 @@ public class ReadNotesUseCase {
     }
 
     private void sortNotesByCreationDate() {
-        Comparator<Note> cmp = Comparator.comparing(n -> n.getCreationDate());
+        Comparator<Note> cmp = Comparator.comparing(Note::getCreationDate).thenComparing(Note::getId);
 
         response.notes = response.notes.stream().sorted(cmp.reversed()).collect(Collectors.toList());
     }
