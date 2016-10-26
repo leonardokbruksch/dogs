@@ -3,12 +3,14 @@ package com.paulograbin.domain.notes;
 
 import com.paulograbin.domain.DateTimeFactory;
 
+import javax.persistence.Table;
 import java.time.*;
 
+@javax.persistence.Entity
 public class Note extends Entity {
 
     private String text;
-    private boolean deleted;
+    private Boolean deleted;
     private final LocalDateTime creationDate;
     private LocalDateTime lastChangedDate;
 
@@ -22,6 +24,7 @@ public class Note extends Entity {
 
         this.id = id;
         this.text = text;
+        this.deleted = true;
         this.creationDate = new DateTimeFactory().getCurrentUTCTime();
         this.lastChangedDate = null;
     }

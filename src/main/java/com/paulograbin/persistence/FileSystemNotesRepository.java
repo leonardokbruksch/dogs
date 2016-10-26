@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-@Repository
+//@Repository
 public class FileSystemNotesRepository implements NotesRepository {
 
     private final String DIRECTORY_NAME = "/OEditor_uploads/";
