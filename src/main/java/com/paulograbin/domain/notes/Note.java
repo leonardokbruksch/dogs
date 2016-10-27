@@ -10,7 +10,7 @@ import java.time.*;
 public class Note extends Entity {
 
     private String text;
-    private Boolean deleted;
+    private boolean deleted;
     private final LocalDateTime creationDate;
     private LocalDateTime lastChangedDate;
 
@@ -24,7 +24,7 @@ public class Note extends Entity {
 
         this.id = id;
         this.text = text;
-        this.deleted = true;
+        this.deleted = false;
         this.creationDate = new DateTimeFactory().getCurrentUTCTime();
         this.lastChangedDate = null;
     }
