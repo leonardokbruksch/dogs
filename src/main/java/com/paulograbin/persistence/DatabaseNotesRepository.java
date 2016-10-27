@@ -32,22 +32,27 @@ public class DatabaseNotesRepository implements NotesRepository {
     }
 
     @Override
+    @Transactional
     public void delete(Integer idToDelete) {
+        Note n = getById(idToDelete); // must test if already deleted
+        n.setDeleted();
 
+        update(n);
     }
 
     @Override
     public void deleteAll() {
-
+//        manager.
     }
 
     @Override
     public Note getById(Integer id) {
-        return null;
+        return manager.find(Note.class, id); // must deal with entity not found
     }
 
     @Override
+    @Transactional
     public void update(Note entity) {
-
+        manager.merge(entity);
     }
 }
