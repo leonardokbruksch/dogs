@@ -17,6 +17,10 @@ public class OEditorApplication {
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(OEditorApplication.class, args);
 
+		System.out.println("connection " + context.getEnvironment().getProperty("mysql_connection"));
+		System.out.println("username " + context.getEnvironment().getProperty("mysql_username"));
+		System.out.println("password " + context.getEnvironment().getProperty("mysql_password"));
+
 //		String[] beanNames = context.getBeanDefinitionNames();
 //		Arrays.sort(beanNames);
 //		for (String beanName : beanNames) {
