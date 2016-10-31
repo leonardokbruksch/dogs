@@ -26,7 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 public class NotesController {
 
     @Inject
-    NotesRepository repository;
+    private NotesRepository repository;
+
     private Gson converter = new Gson();
 
 

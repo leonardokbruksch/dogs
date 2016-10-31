@@ -1,13 +1,15 @@
 package com.paulograbin.domain;
 
-import java.util.Collection;
-
 
 public interface Repository<T> {
 
+    long count();
+
+    boolean exists(Integer id);
+
     void save(T entity);
 
-    Collection<T> list();
+    Iterable<T> getAll();
 
     void delete(Integer idToDelete);
 
