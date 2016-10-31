@@ -1,11 +1,13 @@
 package com.paulograbin.domain.notes.Create;
 
 import com.paulograbin.domain.notes.NotesRepository;
-import com.paulograbin.persistence.InMemoryNotesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.inject.Inject;
+
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 
 public class CreateNoteUseCaseTest {
@@ -16,8 +18,8 @@ public class CreateNoteUseCaseTest {
 
     @Before
     public void setUp() throws Exception {
-        repository = new InMemoryNotesRepository();
         response = new CreateNoteResponse();
+        repository = mock(NotesRepository.class);
     }
 
     @Test

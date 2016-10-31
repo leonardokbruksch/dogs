@@ -22,6 +22,16 @@ public class InMemoryNotesRepository implements NotesRepository {
     }
 
     @Override
+    public long count() {
+        return notes.size();
+    }
+
+    @Override
+    public boolean exists(Integer id) {
+        return false;
+    }
+
+    @Override
     public void save(Note entity) {
         if(entity.getId() == null) {
             entity.setId(getNextId());
@@ -31,13 +41,13 @@ public class InMemoryNotesRepository implements NotesRepository {
         System.out.println("Inserting note " + entity);
     }
 
-    private int getNextId() {
-        return lastId++;
+    @Override
+    public Iterable<Note> getAll() {
+        return null;
     }
 
-    @Override
-    public Collection<Note> list() {
-        return notes.values();
+    private int getNextId() {
+        return lastId++;
     }
 
     @Override
