@@ -37,7 +37,7 @@ public class DatabaseNotesRepository implements NotesRepository {
 
     @Override
     public Collection<Note> getAll() {
-        return manager.createQuery("SELECT e FROM Notes e").getResultList();
+        return manager.createQuery("SELECT e FROM Note e").getResultList();
     }
 
     @Override

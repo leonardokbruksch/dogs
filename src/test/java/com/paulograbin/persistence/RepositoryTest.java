@@ -30,15 +30,38 @@ public abstract class RepositoryTest {
         assertNoteCountIs(0);
     }
 
+
+    /*
+     * GET ALL
+     */
+    @Test
+    public void givenEmptyRepository__mustNotHaveNext() {
+        assertFalse(repository.getAll().iterator().hasNext());
+    }
+
+    @Test
+    public void name() {
+        String noteText = "some random text";
+
+        repository.save(new Note(3, noteText));
+
+        assertEquals(repository.getAll().iterator().next().getText(), noteText);
+    }
+
     /*
      * EXISTS
      */
     @Test
-    public void given() {
+    public void givenValidInput__noteMustExist() {
         Note n = new Note(3, "somw random test");
         repository.save(n);
 
         assertTrue(repository.exists(n.getId()));
+    }
+
+    @Test
+    public void givenInvalidInput__noteMustNotExist() {
+        assertFalse(repository.exists(4));
     }
 
     /*

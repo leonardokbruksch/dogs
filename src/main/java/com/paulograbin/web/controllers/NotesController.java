@@ -27,7 +27,6 @@ public class NotesController {
 
     @Inject
     private NotesRepository repository;
-
     private Gson converter = new Gson();
 
 
