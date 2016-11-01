@@ -2,38 +2,36 @@ package com.paulograbin.domain.notes.Delete;
 
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
+import com.paulograbin.persistence.InMemoryNotesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class DeleteNoteUseCaseTest {
 
     private DeleteNoteRequest request;
     private DeleteNoteResponse response;
-    private NotesRepository mockedRepository;
+    private NotesRepository repository;
 
     @Before
     public void setUp() {
+        repository = new InMemoryNotesRepository();
         response = new DeleteNoteResponse();
-        mockedRepository = mock(NotesRepository.class);
     }
 
     @Test
     public void givenValidInput__noteMustBeDeleted() {
         Note n = new Note();
-        mockedRepository.save(n);
-        verify(mockedRepository).save(n);
+        repository.save(n);
 
         assertFalse(n.isDeleted());
 
         request = new DeleteNoteRequest();
         request.setIdToDelete(n.getId());
 
-        new DeleteNoteUseCase(mockedRepository, request, response).execute();
+        new DeleteNoteUseCase(repository, request, response).execute();
 
         assertTrue(n.isDeleted());
         assertTrue(response.success);
@@ -44,7 +42,7 @@ public class DeleteNoteUseCaseTest {
         request = new DeleteNoteRequest();
         request.setIdToDelete(3);
 
-        new DeleteNoteUseCase(mockedRepository, request, response).execute();
+        new DeleteNoteUseCase(repository, request, response).execute();
 
         assertTrue(response.entityNotFound);
     }
@@ -54,7 +52,7 @@ public class DeleteNoteUseCaseTest {
         request = new DeleteNoteRequest();
         request.setIdToDelete(null);
 
-        new DeleteNoteUseCase(mockedRepository, request, response).execute();
+        new DeleteNoteUseCase(repository, request, response).execute();
 
         assertTrue(response.invalidId);
     }

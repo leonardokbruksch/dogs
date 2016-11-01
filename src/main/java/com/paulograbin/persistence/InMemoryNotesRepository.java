@@ -28,7 +28,7 @@ public class InMemoryNotesRepository implements NotesRepository {
 
     @Override
     public boolean exists(Integer id) {
-        return false;
+        return notes.containsKey(id);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class InMemoryNotesRepository implements NotesRepository {
 
     @Override
     public Iterable<Note> getAll() {
-        return null;
+        return notes.values();
     }
 
     private int getNextId() {
