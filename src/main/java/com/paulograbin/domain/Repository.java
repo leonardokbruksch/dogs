@@ -13,8 +13,6 @@ public interface Repository<T> {
 
     void delete(Integer idToDelete);
 
-    void deleteAll();
-
     T getById(Integer id);
 
     void update(T entity);

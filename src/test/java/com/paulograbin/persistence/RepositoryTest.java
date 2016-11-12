@@ -7,6 +7,8 @@ import com.paulograbin.domain.notes.NotesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.inject.Inject;
+
 import static org.junit.Assert.*;
 
 
@@ -153,7 +155,7 @@ public abstract class RepositoryTest {
         repository.save(new Note());
         assertNoteCountIs(2);
 
-        repository.deleteAll();
+//        repository.deleteAll();
         assertNoteCountIs(0);
     }
 
