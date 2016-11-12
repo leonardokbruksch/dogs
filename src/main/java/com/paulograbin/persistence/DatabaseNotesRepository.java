@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.Collection;
 
@@ -21,7 +22,10 @@ public class DatabaseNotesRepository implements NotesRepository {
 
     @Override
     public long count() {
-        return 0;
+        String query = "SELECT count(n) FROM Note n";
+        Query q = manager.createQuery(query);
+
+        return (long) q.getSingleResult();
     }
 
     @Override
@@ -47,11 +51,6 @@ public class DatabaseNotesRepository implements NotesRepository {
         n.setDeleted();
 
         update(n);
-    }
-
-    @Override
-    public void deleteAll() {
-//        manager.
     }
 
     @Override

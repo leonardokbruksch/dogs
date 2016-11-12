@@ -58,11 +58,6 @@ public class InMemoryNotesRepository implements NotesRepository {
     }
 
     @Override
-    public void deleteAll() {
-        notes.clear();
-    }
-
-    @Override
     public Note getById(Integer id) {
         if(id == null)
             throw new IllegalArgumentException();
