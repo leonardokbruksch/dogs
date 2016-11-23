@@ -1,6 +1,5 @@
 package com.paulograbin.domain;
 
-import com.paulograbin.domain.notes.Entity;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

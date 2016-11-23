@@ -2,6 +2,7 @@ package com.paulograbin.domain.notes.Create;
 
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
+import com.paulograbin.domain.texts.Text;
 
 
 public class CreateNoteUseCase {
@@ -27,7 +28,7 @@ public class CreateNoteUseCase {
     private void create() {
         Note note = new Note();
 
-        note.setText(request.text);
+        note.setText(new Text(null, request.text));
 
         repository.save(note);
         response.success = true;

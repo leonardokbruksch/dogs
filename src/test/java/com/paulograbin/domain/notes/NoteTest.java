@@ -1,6 +1,8 @@
 package com.paulograbin.domain.notes;
 
 import com.paulograbin.domain.EntityTest;
+import com.paulograbin.domain.texts.Text;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -27,14 +29,14 @@ public class NoteTest extends EntityTest<Note> {
     public void noteIsCreatedWithoutTextAndNotDeleted() {
         Note note = new Note();
 
-        assertEquals("", note.getText());
+        assertEquals(Lists.emptyList(), note.getText());
         assertEquals(false, note.isDeleted());
     }
 
     @Test
     public void afterTextIsAdded_NoteMustHaveText() {
         Note note = new Note();
-        note.setText("abc");
+        note.setText(new Text(null, "abc"));
 
         assertEquals("abc", note.getText());
     }

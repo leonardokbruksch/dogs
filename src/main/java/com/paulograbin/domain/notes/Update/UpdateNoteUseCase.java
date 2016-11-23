@@ -5,6 +5,7 @@ import com.paulograbin.domain.DateTimeFactory;
 import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
+import com.paulograbin.domain.texts.Text;
 
 public class UpdateNoteUseCase {
 
@@ -39,7 +40,7 @@ public class UpdateNoteUseCase {
         try {
             Note note = repository.getById(request.id);
 
-            note.setText(request.text);
+            note.setText(new Text(null, request.text));
             note.setLastChangedDate(new DateTimeFactory().getCurrentUTCTime());
 
             repository.update(note);

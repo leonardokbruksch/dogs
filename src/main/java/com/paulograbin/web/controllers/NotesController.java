@@ -15,6 +15,8 @@ import com.paulograbin.domain.notes.Update.UpdateNoteRequest;
 import com.paulograbin.domain.notes.Update.UpdateNoteResponse;
 import com.paulograbin.domain.notes.Update.UpdateNoteUseCase;
 import com.paulograbin.web.crypto.EtagGenerator;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -31,11 +33,13 @@ public class NotesController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public String save(CreateNoteRequest request, HttpServletResponse res) {
+    public ResponseEntity save(CreateNoteRequest request, HttpServletResponse res) {
         CreateNoteResponse response = new CreateNoteResponse();
         new CreateNoteUseCase(repository, request, response).execute();
 
-        return converter.toJson(response);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header("Location", "/notes/")
+                .body(converter.toJson(response));
     }
 
     @RequestMapping(method = RequestMethod.GET)
