@@ -48,6 +48,7 @@ public class FileSystemRepositoryCreatorTest {
     @Test
     public void givenExistingPath__mustBeReady() {
         File repoPath = new File(path + directoryName);
+        creator.create();
         assertTrue(repoPath.exists());
 
         creator.create();
