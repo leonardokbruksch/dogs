@@ -16,4 +16,6 @@ public interface Repository<T> {
     T getById(Integer id);
 
     void update(T entity);
+
+    void deleteAll();
 }
