@@ -5,7 +5,6 @@ import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,5 +75,10 @@ public class InMemoryNotesRepository implements NotesRepository {
 
         saved.setText(e.getText());
         saved.setLastChangedDate(new DateTimeFactory().getCurrentUTCTime());
+    }
+
+    @Override
+    public void deleteAll() {
+        notes.clear();
     }
 }
