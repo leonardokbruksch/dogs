@@ -68,4 +68,12 @@ public class DatabaseNotesRepository implements NotesRepository {
     public void update(Note entity) {
         manager.merge(entity);
     }
+
+    @Override
+    @Transactional
+    public void deleteAll() {
+        int deletedRows = manager.createQuery("UPDATE Note n SET deleted = true WHERE deleted = false").executeUpdate();
+
+        System.out.println(deletedRows + " notes deleted");
+    }
 }
