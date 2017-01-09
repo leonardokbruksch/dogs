@@ -40,7 +40,7 @@ public class UpdateNoteUseCase {
         try {
             Note note = repository.getById(request.id);
 
-            note.setText(new Text(null, request.text));
+            note.addText(new Text(null, request.text));
             note.setLastChangedDate(new DateTimeFactory().getCurrentUTCTime());
 
             repository.update(note);

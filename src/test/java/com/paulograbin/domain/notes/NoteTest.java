@@ -26,11 +26,24 @@ public class NoteTest extends EntityTest<Note> {
     }
 
     @Test
-    public void noteIsCreatedWithoutTextAndNotDeleted() {
+    public void noteIsCreatedNotDeleted() {
         Note note = new Note();
 
-        assertEquals(Lists.emptyList(), note.getText());
-        assertEquals(false, note.isDeleted());
+        assertFalse(note.isDeleted());
+    }
+
+    @Test
+    public void givenNoText__thenNoteIsCreatedWithoutText() {
+        Note note = new Note(5);
+
+        assertEquals(note.getTexts(), Lists.emptyList());
+    }
+
+    @Test
+    public void givenAText__thenNoteIsCreatedWithText() {
+        Note note = new Note(6, "test text");
+
+        assertEquals(note.getLatestText().getText(), "test text");
     }
 
     @Test
@@ -38,7 +51,7 @@ public class NoteTest extends EntityTest<Note> {
         Note note = new Note();
         note.setText(new Text(null, "abc"));
 
-        assertEquals("abc", note.getText());
+        assertTrue(note.getTexts().size() > 0);
     }
 
     @Test
@@ -67,6 +80,13 @@ public class NoteTest extends EntityTest<Note> {
         m.setLastChangedDate(now);
 
         assertTrue(n.equals(m));
+    }
+
+    @Test
+    public void givenNoteWithoutText__whenGettingLattestText__thenMustReturnNull() {
+        Note n = new Note(5);
+
+        assertEquals(null, n.getLatestText());
     }
 
     @Override

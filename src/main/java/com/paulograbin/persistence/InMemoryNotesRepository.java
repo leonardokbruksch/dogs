@@ -4,8 +4,9 @@ import com.paulograbin.domain.DateTimeFactory;
 import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
+import com.paulograbin.domain.texts.Text;
 
-import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,11 +15,14 @@ import java.util.Map;
 public class InMemoryNotesRepository implements NotesRepository {
 
     private final Map<Integer, Note> notes;
-    private int lastId;
+    private int lastNoteId;
+    private int lastTextId;
 
     public InMemoryNotesRepository() {
-        lastId = 0;
-        notes = new HashMap<>();
+        lastNoteId = 0;
+        lastTextId = 0;
+
+        this.notes = new HashMap<>();
     }
 
     @Override
@@ -33,9 +37,16 @@ public class InMemoryNotesRepository implements NotesRepository {
 
     @Override
     public void save(Note entity) {
-        if(entity.getId() == null) {
-            entity.setId(getNextId());
+        if (entity.getId() == null) {
+            entity.setId(fetchNextNoteId());
         }
+
+        for(Text t : entity.getTexts()) {
+            if(t.getId() == null)
+                t.setId(fetchNextTextId());
+        }
+
+        System.out.println(entity.getTexts().size());
 
         notes.put(entity.getId(), entity);
         System.out.println("Inserting note " + entity);
@@ -46,8 +57,12 @@ public class InMemoryNotesRepository implements NotesRepository {
         return notes.values();
     }
 
-    private int getNextId() {
-        return lastId++;
+    private int fetchNextNoteId() {
+        return lastNoteId++;
+    }
+
+    private int fetchNextTextId() {
+        return lastTextId++;
     }
 
     @Override
@@ -71,10 +86,16 @@ public class InMemoryNotesRepository implements NotesRepository {
     }
 
     @Override
-    public void update(Note e) {
-        Note saved = getById(e.getId());
+    public void update(Note note) {
 
-        saved.setText(e.getText());
-        saved.setLastChangedDate(new DateTimeFactory().getCurrentUTCTime());
+        note.setLastChangedDate(new DateTimeFactory().getCurrentUTCTime());
+
+        notes.put(note.getId(), note);
     }
+
+    @Override
+    public void deleteAll() {
+        notes.clear();
+    }
+
 }

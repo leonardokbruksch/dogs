@@ -7,8 +7,6 @@ import com.paulograbin.persistence.InMemoryNotesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.inject.Inject;
-
 import static org.junit.Assert.*;
 
 public class UpdateNoteUseCaseTest {
@@ -25,16 +23,18 @@ public class UpdateNoteUseCaseTest {
     }
 
     @Test
-    public void givenValidInput__noteMustBeUpdated() {
+    public void givenValidInput__noteMustBeUpdated() throws InterruptedException {
         Note n = new Note(3, "olá");
         repository.save(n);
+
+        Thread.sleep(1000L);
 
         request.setId(3);
         request.setText("olá marilene");
 
         new UpdateNoteUseCase(repository, request, response).execute();
 
-        assertEquals("olá marilene", n.getText());
+        assertEquals("olá marilene", n.getLatestText().getText());
         assertTrue(response.success);
     }
 
@@ -72,7 +72,7 @@ public class UpdateNoteUseCaseTest {
 
         new UpdateNoteUseCase(repository, request, response).execute();
 
-        assertEquals("olá", n.getText());
+        assertEquals("olá", n.getLatestText().getText());
         assertTrue(response.invalidId);
     }
 
@@ -86,7 +86,7 @@ public class UpdateNoteUseCaseTest {
 
         new UpdateNoteUseCase(repository, request, response).execute();
 
-        assertEquals("olá", n.getText());
+        assertEquals("olá", n.getLatestText().getText());
         assertTrue(response.invalidText);
     }
 }

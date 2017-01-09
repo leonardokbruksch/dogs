@@ -5,6 +5,7 @@ import com.paulograbin.domain.notes.Note;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @javax.persistence.Entity
 @Table(name = "Texts")
@@ -12,7 +13,6 @@ public class Text extends Entity {
 
     @ManyToOne
     private Note note;
-
     private String text;
 
 
@@ -23,9 +23,21 @@ public class Text extends Entity {
     public Text(Integer id, String text) {
         super(id);
 
-        this.text = text;
+        this.text = text.trim();
     }
 
+
+    public LocalDateTime getCreationDate() {
+        return super.getCreationDate();
+    }
+
+    public Integer getId() {
+        return super.getId();
+    }
+
+    public void setId(Integer id) {
+        super.setId(id);
+    }
 
     public String getText() {
         return text;
@@ -41,5 +53,12 @@ public class Text extends Entity {
 
     public void setNote(Note note) {
         this.note = note;
+    }
+
+    public String toString() {
+        return "Text{" +
+                "id='" + super.getId() + '\'' +
+                ", text='" + text + '\'' +
+                "} ";
     }
 }

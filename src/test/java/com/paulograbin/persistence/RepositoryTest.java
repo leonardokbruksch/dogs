@@ -7,8 +7,6 @@ import com.paulograbin.domain.notes.NotesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.inject.Inject;
-
 import static org.junit.Assert.*;
 
 
@@ -47,7 +45,7 @@ public abstract class RepositoryTest {
 
         repository.save(new Note(3, noteText));
 
-        assertEquals(repository.getAll().iterator().next().getText(), noteText);
+        assertEquals(repository.getAll().iterator().next().getTexts(), noteText);
     }
 
     /*
@@ -155,7 +153,7 @@ public abstract class RepositoryTest {
         repository.save(new Note());
         assertNoteCountIs(2);
 
-//        repository.deleteAll();
+        repository.deleteAll();
         assertNoteCountIs(0);
     }
 
@@ -193,7 +191,7 @@ public abstract class RepositoryTest {
 
         n = repository.getById(n.getId());
 
-        assertEquals("olá marilene", n.getText());
+        assertEquals("olá marilene", n.getLatestText().getText());
     }
 
 

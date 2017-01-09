@@ -6,12 +6,13 @@ import com.paulograbin.domain.notes.Create.CreateNoteUseCase;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
 import com.paulograbin.persistence.InMemoryNotesRepository;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 public class ReadNoteUseCaseTest {
@@ -47,8 +48,12 @@ public class ReadNoteUseCaseTest {
         whenReadingAllNotes();
 
         ArrayList<Note> notes = new ArrayList<>(response.notes);
-        assertEquals(notes.get(0).getText(), "Second note");
-        assertEquals(notes.get(1).getText(), "First note");
+        assertNoteHasText(notes.get(0), "Second note");
+        assertNoteHasText(notes.get(1), "First note");
+    }
+
+    public void assertNoteHasText(Note note, String text) {
+        assertTrue(note.getLatestText().getText().equals(text));
     }
 
     private void givenANote(String text) {

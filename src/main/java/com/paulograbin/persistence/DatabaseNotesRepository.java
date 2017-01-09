@@ -68,4 +68,9 @@ public class DatabaseNotesRepository implements NotesRepository {
     public void update(Note entity) {
         manager.merge(entity);
     }
+
+    @Override
+    public void deleteAll() {
+
+    }
 }

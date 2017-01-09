@@ -30,4 +30,8 @@ public abstract class Entity {
         if(value >= 0)
             id = value;
     }
+
+    protected LocalDateTime getCreationDate() {
+        return creationDate;
+    }
 }
