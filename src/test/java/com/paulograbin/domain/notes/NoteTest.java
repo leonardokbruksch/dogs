@@ -5,7 +5,7 @@ import com.paulograbin.domain.texts.Text;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
+import java.time.*;
 
 import static org.junit.Assert.*;
 
@@ -16,6 +16,25 @@ public class NoteTest extends EntityTest<Note> {
     public void NoteIsCreatedWithCreationDate() {
         Note note = new Note();
         assertNotNull(note.getCreationDate());
+    }
+
+    @Test
+    public void creationDateMustBeCloseToCurrentTime() throws InterruptedException {
+        Note note = new Note();
+        LocalDateTime noteCreationDate = note.getCreationDate();
+
+        LocalDateTime currentTime = ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime();
+
+        assertTimeDifferenceIsNegligible(noteCreationDate, currentTime);
+    }
+
+    private void assertTimeDifferenceIsNegligible(LocalDateTime noteCreationDate, LocalDateTime currentTime) {
+        Duration d = Duration.between(noteCreationDate, currentTime);
+
+        assertEquals(0, d.toDays());
+        assertEquals(0, d.toHours());
+        assertEquals(0, d.toMinutes());
+        assertEquals(0, d.getSeconds());
     }
 
     @Test
