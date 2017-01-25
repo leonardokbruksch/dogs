@@ -11,13 +11,17 @@ import java.time.LocalDateTime;
 @Table(name = "Texts")
 public class Text extends Entity {
 
+    public final static Text EMPTY = new Text("");
+
     @ManyToOne
     private Note note;
     private String text;
 
 
-    public Text() {
-        this(null, "");
+    public Text(String text) {
+        super(null);
+
+        this.text = text == null ? "" : text.trim();
     }
 
     public Text(Integer id, String text) {

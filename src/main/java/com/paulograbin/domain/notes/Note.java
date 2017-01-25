@@ -39,7 +39,7 @@ public class Note extends Entity {
         this.deleted = false;
         this.texts = new ArrayList();
 
-        Text t = new Text();
+        Text t = Text.EMPTY;
         t.setText(text);
 
         texts.add(t);
