@@ -14,6 +14,7 @@ import com.paulograbin.domain.notes.ResponseWrapper;
 import com.paulograbin.domain.notes.Update.UpdateNoteRequest;
 import com.paulograbin.domain.notes.Update.UpdateNoteResponse;
 import com.paulograbin.domain.notes.Update.UpdateNoteUseCase;
+import com.paulograbin.domain.texts.TextsRepository;
 import com.paulograbin.web.crypto.EtagGenerator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 @CrossOrigin
 @RestController
@@ -29,6 +31,7 @@ public class NotesController {
 
     @Inject
     private NotesRepository repository;
+
     private Gson converter = new Gson();
 
 
@@ -80,5 +83,11 @@ public class NotesController {
         System.out.println(responseJSON);
 
         return responseJSON;
+    }
+
+    @Transactional
+    @RequestMapping(value="/deleteAll", method = RequestMethod.GET)
+    public void deleteAll() {
+        repository.deleteAll();
     }
 }

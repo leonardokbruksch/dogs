@@ -71,6 +71,7 @@ public class DatabaseNotesRepository implements NotesRepository {
 
     @Override
     public void deleteAll() {
-
+        int deletedRows = manager.createQuery("UPDATE Note n SET deleted = true WHERE deleted = false").executeUpdate();
+        System.out.println(deletedRows + " notes deleted");
     }
 }

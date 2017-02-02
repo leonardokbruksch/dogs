@@ -14,11 +14,8 @@ public class IpController {
 
     @RequestMapping()
     public void printIp(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        res.getWriter().write("Remote addr: " + req.getRemoteAddr() + "\n");
-        res.getWriter().write("Remote host: " + req.getRemoteHost() + "\n");
-
-        res.getWriter().write("Local addr: " + req.getLocalAddr() + "\n");
-        res.getWriter().write("Local name: " + req.getLocalName() + "\n");
+        res.getWriter().write("Your address: " + req.getRemoteAddr() + "\n");
+        res.getWriter().write("Server address: " + req.getLocalName() + "\n");
     }
 
 }

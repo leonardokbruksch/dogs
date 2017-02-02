@@ -3,6 +3,7 @@ package com.paulograbin.domain.notes;
 import com.paulograbin.domain.Entity;
 import com.paulograbin.domain.texts.Text;
 
+import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ import java.util.Optional;
 @Table(name = "Notes")
 public class Note extends Entity {
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Text> texts;
     private boolean deleted;
 
@@ -57,10 +58,6 @@ public class Note extends Entity {
     }
 
     public void addText(Text text) {
-        texts.add(text);
-    }
-
-    public void setText(Text text) {
         texts.add(text);
     }
 

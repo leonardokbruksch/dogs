@@ -28,7 +28,7 @@ public class CreateNoteUseCase {
     private void create() {
         Note note = new Note();
 
-        note.setText(new Text(null, request.text));
+        note.addText(new Text(null, request.text));
 
         repository.save(note);
         response.success = true;
