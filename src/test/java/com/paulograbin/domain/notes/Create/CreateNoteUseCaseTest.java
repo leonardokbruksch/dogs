@@ -5,7 +5,8 @@ import com.paulograbin.persistence.InMemoryNotesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 
 public class CreateNoteUseCaseTest {
@@ -16,8 +17,8 @@ public class CreateNoteUseCaseTest {
 
     @Before
     public void setUp() throws Exception {
-        repository = new InMemoryNotesRepository();
         response = new CreateNoteResponse();
+        repository = new InMemoryNotesRepository();
     }
 
     @Test

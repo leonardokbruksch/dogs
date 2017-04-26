@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+
 public abstract class RepositoryTest {
 
     protected NotesRepository repository;
@@ -29,6 +30,40 @@ public abstract class RepositoryTest {
         assertNoteCountIs(0);
     }
 
+
+    /*
+     * GET ALL
+     */
+    @Test
+    public void givenEmptyRepository__mustNotHaveNext() {
+        assertFalse(repository.getAll().iterator().hasNext());
+    }
+
+    @Test
+    public void name() {
+        String noteText = "some random text";
+
+        repository.save(new Note(3, noteText));
+
+        assertEquals(repository.getAll().iterator().next().getText(), noteText);
+    }
+
+    /*
+     * EXISTS
+     */
+    @Test
+    public void givenValidInput__noteMustExist() {
+        Note n = new Note(3, "somw random test");
+        repository.save(n);
+
+        assertTrue(repository.exists(n.getId()));
+    }
+
+    @Test
+    public void givenInvalidInput__noteMustNotExist() {
+        assertFalse(repository.exists(4));
+    }
+
     /*
      * SAVE
      */
@@ -45,7 +80,7 @@ public abstract class RepositoryTest {
 
         repository.save(aNote);
 
-        assertNotNull(aNote.getId());
+        assertNotNull(repository.exists(aNote.getId()));
     }
 
     @Test
@@ -161,6 +196,6 @@ public abstract class RepositoryTest {
 
 
     protected void assertNoteCountIs(int expectedSize) {
-        assertEquals(expectedSize, repository.list().size());
+        assertEquals(expectedSize, repository.count());
     }
 }

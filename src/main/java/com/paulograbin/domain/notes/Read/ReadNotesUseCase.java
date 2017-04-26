@@ -18,7 +18,7 @@ public class ReadNotesUseCase {
     }
 
     public void execute() {
-        repository.list().forEach(response::insertItem);
+        repository.getAll().forEach(response::insertItem);
 
         sortNotesByCreationDate();
     }
