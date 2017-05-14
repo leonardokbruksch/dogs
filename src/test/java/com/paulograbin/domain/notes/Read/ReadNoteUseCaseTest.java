@@ -9,6 +9,7 @@ import com.paulograbin.persistence.InMemoryNotesRepository;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;

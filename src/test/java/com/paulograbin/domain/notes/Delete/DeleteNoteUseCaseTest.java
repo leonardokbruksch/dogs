@@ -25,6 +25,7 @@ public class DeleteNoteUseCaseTest {
     public void givenValidInput__noteMustBeDeleted() {
         Note n = new Note();
         repository.save(n);
+
         assertFalse(n.isDeleted());
 
         request = new DeleteNoteRequest();

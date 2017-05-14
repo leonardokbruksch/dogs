@@ -5,7 +5,6 @@ import com.paulograbin.domain.EntityNotFoundException;
 import com.paulograbin.domain.notes.Note;
 import com.paulograbin.domain.notes.NotesRepository;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +21,16 @@ public class InMemoryNotesRepository implements NotesRepository {
     }
 
     @Override
+    public long count() {
+        return notes.size();
+    }
+
+    @Override
+    public boolean exists(Integer id) {
+        return notes.containsKey(id);
+    }
+
+    @Override
     public void save(Note entity) {
         if(entity.getId() == null) {
             entity.setId(getNextId());
@@ -31,13 +40,13 @@ public class InMemoryNotesRepository implements NotesRepository {
         System.out.println("Inserting note " + entity);
     }
 
-    private int getNextId() {
-        return lastId++;
+    @Override
+    public Iterable<Note> getAll() {
+        return notes.values();
     }
 
-    @Override
-    public Collection<Note> list() {
-        return notes.values();
+    private int getNextId() {
+        return lastId++;
     }
 
     @Override
@@ -45,11 +54,6 @@ public class InMemoryNotesRepository implements NotesRepository {
         Note n = getById(idToDelete);
 
         n.setDeleted();
-    }
-
-    @Override
-    public void deleteAll() {
-        notes.clear();
     }
 
     @Override
@@ -71,5 +75,10 @@ public class InMemoryNotesRepository implements NotesRepository {
 
         saved.setText(e.getText());
         saved.setLastChangedDate(new DateTimeFactory().getCurrentUTCTime());
+    }
+
+    @Override
+    public void deleteAll() {
+        notes.clear();
     }
 }
