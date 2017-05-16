@@ -7,7 +7,7 @@ import java.time.*;
 
 
 @javax.persistence.Entity
-@Table(name = "Notes")
+@Table(name = "Note")
 public class Note extends Entity {
 
     private String text;
