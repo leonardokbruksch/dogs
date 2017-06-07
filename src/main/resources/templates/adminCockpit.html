@@ -5,10 +5,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
-    <title>Hello World!</title>
+    <title>Admin Cockpit</title>
 </head>
 <body>
-BEM VINDO AO PORTAL <td th:text="${loggedUser.firstName}">2</td>
+Admin Cockpit <td th:text="${isAdminUser}">sample</td>
 <a href="/logout">Logout</a>
+</br>
+<a href="/dogsCockpit" class="btn btn-default">Dogs Cockpit</a>
 </body>
 </html>
