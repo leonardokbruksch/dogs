@@ -5,10 +5,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
-    <title>Hello World!</title>
+    <title>Homepage</title>
 </head>
 <body>
 BEM VINDO AO PORTAL <td th:text="${loggedUser.firstName}">2</td>
 <a href="/logout">Logout</a>
+<a class="btn btn-warning btn-lg" href="/dogsForAdoption" >Dogs Available for Adoption</a>
 </body>
 </html>

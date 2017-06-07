@@ -16,9 +16,7 @@
 
 
         <div class="col-md-12">
-            <h4>Bootstrap Snipp for Datatable</h4>
-
-            <td th:text="${dogs}">2</td>
+            <h4>Admin Dogs Cockpit</h4>
 
             <div class="table-responsive">
 
@@ -51,17 +49,11 @@
                 </table>
 
                 <div class="clearfix"></div>
-                <ul class="pagination pull-right">
-                    <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                </ul>
 
             </div>
+
+            <button class="btn btn-warning btn-lg" data-title="Add" data-toggle="modal" data-target="#add" >Add dog for Adoption</button>
+
 
         </div>
     </div>
@@ -121,6 +113,36 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align">Add Dog</h4>
+            </div>
+            <div class="modal-body">
+
+                <input class="form-control dogId" type="hidden">
+
+                <div class="form-group">
+                    <label for="dogName" class="form-control-label">Dog Name:</label>
+                    <input class="form-control " type="text" id="dogNameAdd">
+                </div>
+                <div class="form-group">
+                    <label for="dogAge" class="form-control-label">Dog Age:</label>
+                    <input class="form-control" type="text" id="dogAgeAdd">
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" id="addDog" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 </body>
 <script th:src="@{/js/dogsCockpit.js}"></script>
 </html>

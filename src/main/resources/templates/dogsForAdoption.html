@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+    <title>Hello World!</title>
+</head>
+<body>
+<div class="col-md-12">
+    <h4>Dogs Available for Adoption</h4>
+
+    <div class="table-responsive">
+
+        <table id="mytable" class="table table-bordred table-striped">
+
+            <thead>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Adopt</th>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="dog : ${dogs}">
+                <td th:text="${{dog.name}}" class="dogName">name</td>
+                <td th:text="${{dog.age}}" class="dogAge">age</td>
+                <input th:value="${{dog.id}}" class="dogId" type="hidden">
+
+                <td><p title="Adopt"><button class="btn btn-danger btn-xs" data-title="Adopt"><span class="glyphicon glyphicon-heart"></span></button></p></td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+</body>
+</html>

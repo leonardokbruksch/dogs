@@ -38,4 +38,11 @@ public class DogsCockpitController {
         dog.setId(dogId);
         repository.save(dog);
     }
+
+    @PostMapping("/addDog")
+    @ResponseBody
+    public void addDog(@RequestParam String dogName, @RequestParam String dogAge){
+        Dogs dog = new Dogs(dogAge, dogName);
+        repository.save(dog);
+    }
 }

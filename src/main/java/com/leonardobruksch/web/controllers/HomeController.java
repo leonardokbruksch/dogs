@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -28,9 +29,9 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public String homePage(HttpServletRequest request, HttpServletResponse response, Model model) {
-        User user = (User) request.getSession().getAttribute("loggedUser");
-        model.addAttribute("loggedUser", user);
+    public String homePage(HttpServletRequest request, HttpServletResponse response, Model model,  HttpSession session) {
+        final Object loggedUser = session.getAttribute("loggedUser");
+        model.addAttribute("loggedUser", loggedUser);
         return "home";
     }
 

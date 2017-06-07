@@ -71,4 +71,22 @@ $(document).ready(function(){
             }
         })
     })
+
+    $('#addDog').on('click', function (event) {
+        var modal = $(this);
+
+        var modalBody = modal.closest('div').siblings('.modal-body');
+
+        var dogAge = modalBody.find('#dogAgeAdd').val();
+        var dogName = modalBody.find('#dogNameAdd').val();
+
+        $.ajax({
+            url: '/addDog',
+            data: {'dogAge': dogAge, 'dogName': dogName},
+            type: 'POST',
+            success: function (response) {
+                location.reload();
+            }
+        })
+    })
 });

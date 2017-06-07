@@ -23,12 +23,15 @@ public class AuthorizerInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
+        if(uri.endsWith("dogsCockpit") &&  request.getSession().getAttribute("isAdminUser") == null ){
+            response.sendRedirect("loginForm");
+        }
+
         if(request.getSession().getAttribute("loggedUser") != null
                 || request.getSession().getAttribute("isAdminUser") != null ) {
             return true;
         }
-        //response.sendRedirect("loginForm");
-        return true;
-
+        response.sendRedirect("loginForm");
+        return false;
     }
 }
