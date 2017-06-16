@@ -9,6 +9,8 @@
 </head>
 <body>
 <div class="col-md-12">
+    Bem vindo ao portal, <td th:text="${loggedUser.firstName}">nome</td>!
+    <p><a href="/logout">Logout</a></p>
     <h4>Dogs Available for Adoption</h4>
 
     <div class="table-responsive">
@@ -28,7 +30,7 @@
                 <td th:text="${{dog.age}}" class="dogAge">age</td>
                 <input th:value="${{dog.id}}" class="dogId" type="hidden">
 
-                <td><p title="Adopt"><button class="btn btn-danger btn-xs" data-title="Adopt"><span class="glyphicon glyphicon-heart"></span></button></p></td>
+                <td><p title="Adopt"><button class="btn btn-danger btn-xs" data-title="Adopt" data-toggle="modal" data-target="#adopt"><span class="glyphicon glyphicon-heart"></span></button></p></td>
             </tr>
 
             </tbody>
@@ -37,6 +39,54 @@
 
     </div>
 
+    <p title="Filter by Age"><button class="btn btn-danger btn-xs" data-title="Filter" data-toggle="modal" data-target="#filter"><span class="glyphicon glyphicon-search"></span></button></p>
+
+    <div class="modal fade" id="adopt" tabindex="-1" role="dialog" aria-labelledby="adopt" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align" id="Heading">Adopt this dog</h4>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control dogId" type="hidden">
+                    <div class="alert alert-info">
+                        Are you sure you want to Adopt this Dog?
+                        <p>An email will be sent to you with the directions!</p>
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <input class="form-control" type="hidden" id="dogId">
+                    <button type="button" class="btn btn-success" id="adoptDog" ><span class="glyphicon glyphicon-heart"></span> Adopt!</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filter" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align">Filter Dogs by Age</h4>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control" id="ageFrom"> TO
+                    <input class="form-control" id="ageTo">
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-success" id="doFilter" ><span class="glyphicon glyphicon-search"></span> Filter</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
 </div>
 </body>
+<script th:src="@{/js/dogsAdoption.js}"></script>
 </html>

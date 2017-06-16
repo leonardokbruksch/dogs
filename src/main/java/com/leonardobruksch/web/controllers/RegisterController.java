@@ -32,6 +32,6 @@ public class RegisterController {
         repository.save(newUser);
         session.setAttribute("loggedUser", newUser);
 
-        return "redirect:home";
+        return "redirect:dogsForAdoption";
     }
 }

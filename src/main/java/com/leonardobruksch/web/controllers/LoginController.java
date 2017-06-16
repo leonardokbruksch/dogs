@@ -36,12 +36,12 @@ public class LoginController {
         if(loginForm.getEmail().equals("admin@admin.com")){
             session.setAttribute("isAdminUser", true);
             session.setAttribute("loggedUser", "admin@admin.com");
-            return "redirect:admin";
+            return "redirect:dogsCockpit";
         }
 
         if (repository.findByEmail(loginForm.getEmail()) != null && repository.findByPassword(loginForm.getPassword()) != null){
             session.setAttribute("loggedUser", repository.findByEmail(loginForm.getEmail()));
-            return "redirect:home";
+            return "redirect:dogsForAdoption";
         }
 
         return "loginForm";

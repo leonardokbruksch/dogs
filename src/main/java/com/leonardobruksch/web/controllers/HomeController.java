@@ -28,11 +28,4 @@ public class HomeController {
         response.sendRedirect("/loginForm");
     }
 
-    @RequestMapping("/home")
-    public String homePage(HttpServletRequest request, HttpServletResponse response, Model model,  HttpSession session) {
-        final Object loggedUser = session.getAttribute("loggedUser");
-        model.addAttribute("loggedUser", loggedUser);
-        return "home";
-    }
-
 }
